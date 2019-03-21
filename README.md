@@ -22,7 +22,7 @@ Success occurs when the following are implemented and tested:
 - VerticallyStackedUp(Shape ... shapes)
 - HorizontallyStackedRight(Shape ... shapes)
 
-## Steps to Compile and Run the Program 
+## Steps to Compile and Run the Main Program
 (This method requires CMake 2.6 or later to be installed)
 
 1. Create a new folder in the project folder called `build`

@@ -22,5 +22,21 @@ Success occurs when the following are implemented and tested:
 - VerticallyStackedUp(Shape ... shapes)
 - HorizontallyStackedRight(Shape ... shapes)
 
-## Steps to compile
-@TODO
+## Steps to Compile and Run the Program 
+(This method requires CMake 2.6 or later to be installed)
+
+1. Create a new folder in the project folder called `build`
+2. Navigate into `build`
+3. `cmake ..`
+4. `make`
+5. Run `./cps_main.out`
+
+## Steps to Compile and Run the Testing Framework
+(This method requires CMake 2.6 or later to be installed)
+
+1. Download the Catch2 single-header [catch.hpp](https://github.com/catchorg/Catch2/releases/download/v2.6.1/catch.hpp) into the folder `include`
+2. Create a new folder in the project folder called `build` (if not already created)
+3. Navigate into `build`.
+4. `cmake ..`
+5. `make`
+6. Run `./catch_tests.out`

@@ -1,6 +1,13 @@
 # CPS (C++ to PostScript)
 CS 372 Project 2 -- Michael Bilan, Bradley Morton and Charles Emerson
 
+## Table of Contents:
+
+1. [Introduction](#introduction)
+2. [Success Criteria](#success-criteria)
+3. [Steps to Compile and Run the Main Program](#steps-to-compile-and-run-the-main-program)
+4. [Steps to Compile and Run the Testing Framework](#steps-to-compile-and-run-the-testing-framework)
+
 ## Introduction
 This is a Software Construction exercise in design patterns. The goal of this project is to design and implement a high-level C++ shapes-language to PostScript translator.
 

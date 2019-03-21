@@ -88,9 +88,9 @@
 	/x exch def
 
 	x y translate
-	scale_x scale_y rotate
+	scale_x scale_y scale
 	x neg y neg translate
-}
+} def
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,6 +107,12 @@ gsave
 
 	256 326 34.64101615 3 polygon
 	356 326 34.64101615 3 polygon
+grestore
+
+gsave
+	100 100 2 2 scaleAbout
+
+	100 100 100 2 polygon
 grestore
 
 showpage

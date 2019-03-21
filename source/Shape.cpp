@@ -104,9 +104,9 @@ static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
     /x exch def
 
     x y translate
-    scale_x scale_y rotate
+    scale_x scale_y scale
     x neg y neg translate
-}
+} def
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

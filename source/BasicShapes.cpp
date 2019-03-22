@@ -65,30 +65,37 @@ Polygon::Polygon(unsigned int numSides, double sideLength)
 
 point_t Polygon::getBoundingBox() const
 {
-	const double PI = 3.141592653589793;
+	const auto n = _numSides;
+	const double e = _sideLength;
+	const double pi = 3.14159265358979323846;
 
-	auto n = _numSides;
-	auto e = _sideLength;
+	double width, height;
 
-	auto piDivN = PI/n;
-	auto cos_piDivN = cos(piDivN);
-	auto sin_piDivN = sin(piDivN);
+	// Case 1: n is odd.
+	// height = e(1+cos(π/n))/(2sin(π/n))
+	// width = (e sin(π(n-1)/2n))/(sin(π/n))
+	if (n % 2 == 1)
+	{
+		height = e*(1+cos(pi/n))/(2*sin(pi/n));
+		width = (e*sin(pi*(n-1)/2*n))/(sin(pi/n));
+	}
+	// Case 2: n is divisible by 4.
+	// height = e(cos(π/n))/(sin(π/n))
+	// width = (e cos(π/n))/(sin(π/n))
+	else if (n % 4 == 0){
+		height = e*(cos(pi/n))/(sin(pi/n));
+		width = (e*cos(pi/n))/(sin(pi/n));
+	}
+	// Case 3: n is divisible by 2, but not by 4.
+	// height = e(cos(π/n))/(sin(π/n))
+	// width = e/(sin(π/n))
+	else
+	{
+		height = e*(cos(pi/n))/(sin(pi/n));
+		width = e/(sin(pi/n));
+	}
 
-	if ( n % 1 )
-	{
-		return {e * sin( PI*(n-1) / (2*n) ) / sin_piDivN,
-				e * (1 + cos_piDivN) / (2 * sin_piDivN)};
-	}
-	else if (n % 4 == 0)
-	{
-		auto temp = e * cos_piDivN / sin_piDivN;
-		return {temp, temp};
-	}
-	else // if (n % 2 == 0 && ! (n % 4 == 0))
-	{
-		return {e * cos_piDivN / sin_piDivN,
-				e / sin_piDivN};
-	}
+	return {width, height};
 }
 
 std::string Polygon::generate(point_t center) const

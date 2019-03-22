@@ -34,8 +34,10 @@
 // *********************************************************************
 
 #include <string>
-// For std::string
+// For std::string, std::to_string
 
+#include <utility>
+// For std::swap
 
 // *********************************************************************
 // Helper Classes for this Test Program
@@ -75,6 +77,22 @@ public:
 	{
 		return generate(_center);
 	}
+};
+
+// TestRectangle
+// Overrides evaluate to only spit out generate() at a known center. 
+class TestRectangle : public Rectangle, public TestShape
+{
+public:
+	TestRectangle(double width, double height)
+		: Rectangle(width, height), TestShape()
+	{ }
+
+	std::string evaluate() const override
+	{
+		return generate(_center);
+	}
+};
 
 
 // *********************************************************************
@@ -97,6 +115,14 @@ void test_circleBoundingBox(double radius)
 	REQUIRE( circle.getBoundingBox().y == 2 * radius );
 }
 
+void test_rectangleBoundingBox(double width, double height)
+{
+	Rectangle rectangle(width, height);
+	INFO("A Rectangle with width " << width << " and height " << height << "returns the correct bounding box with width " << width << " and height " << height);
+	REQUIRE( rectangle.getBoundingBox().x == width);
+	REQUIRE( rectangle.getBoundingBox().y == height);
+}
+
 void test_circleGenerate(point_t center, double radius)
 {
 	using std::to_string;
@@ -104,8 +130,19 @@ void test_circleGenerate(point_t center, double radius)
 	TestCircle circle(radius);
 	circle.setCenter(center);
 
-	INFO("Circle with radius " << radius << "at (" << center.x << ", " << center.y << ") generates correct PostScript");
+	INFO("Circle with radius " << radius << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
 	REQUIRE( circle.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(radius) + " circle\n" );
+}
+
+void test_rectangleGenerate(point_t center, double width, double height)
+{
+	using std::to_string;
+
+	TestRectangle rectangle(width, height);
+	rectangle.setCenter(center);
+
+	INFO("Rectangle with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
+	REQUIRE( rectangle.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(width) + " " + to_string(height) + " rectangle\n" );
 }
 
 
@@ -122,6 +159,19 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 		test_circleBoundingBox(50.0);
 		test_circleBoundingBox(100.0);
 		test_circleBoundingBox(500.0);
+	}
+
+	SECTION("Rectangle - Bounding Box")
+	{
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_rectangleBoundingBox(i, j);
+			}
+		}
 	}
 }
 
@@ -149,5 +199,37 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 		test_circleGenerate(center, 50.0);
 		test_circleGenerate(center, 100.0);
 		test_circleGenerate(center, 500.0);
+	}
+
+	SECTION("Rectangle - PostScript Generation")
+	{
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+		point_t center = {0.0, 0.0};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_rectangleGenerate(center, i, j);
+			}
+		}
+
+		center = {500.0, 500.0};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_rectangleGenerate(center, i, j);
+			}
+		}
+
+		center = {-73.07333, 499.02001};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_rectangleGenerate(center, i, j);
+			}
+		}
 	}
 }

@@ -109,6 +109,21 @@ public:
 	}
 };
 
+// TestSpacer
+// Overrides evaluate to only spit out generate() at a known center. 
+class TestSpacer : public Spacer, public TestShape
+{
+public:
+	TestSpacer(double width, double height)
+		: Spacer(width, height), TestShape()
+	{ }
+
+	std::string evaluate() const override
+	{
+		return generate(_center);
+	}
+};
+
 
 // *********************************************************************
 // Helper Functions for this Test Program
@@ -177,6 +192,14 @@ void test_polygonBoundingBox(unsigned int numSides, double sideLength)
 	REQUIRE(polygon.getBoundingBox().y == Approx(height));
 }
 
+void test_spacerBoundingBox(double width, double height)
+{
+	Spacer spacer(width, height);
+	INFO("A Spacer with width " << width << " and height " << height << " has a bounding box with width " << width << " and height " << height);
+	REQUIRE( spacer.getBoundingBox().x == width);
+	REQUIRE( spacer.getBoundingBox().y == height);
+}
+
 void test_circleGenerate(point_t center, double radius)
 {
 	using std::to_string;
@@ -208,6 +231,15 @@ void test_polygonGenerate(point_t center, unsigned int numSides, double sideLeng
 
 	INFO("Polygon with " << numSides << " sides each of length " << sideLength << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
 	REQUIRE( polygon.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(sideLength) + " " + to_string(numSides) + " polygon\n" );
+}
+
+void test_spacerGenerate(point_t center, double width, double height)
+{
+	TestSpacer spacer(width, height);
+	spacer.setCenter(center);
+
+	INFO("Spacer with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates no PostScript");
+	REQUIRE( spacer.evaluate() == "" );
 }
 
 
@@ -250,6 +282,19 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 			for (numSides : numSides_list)
 			{
 				test_polygonBoundingBox(numSides, sideLength);
+			}
+		}
+	}
+
+	SECTION("Spacer - Bounding Box")
+	{
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_spacerBoundingBox(i, j);
 			}
 		}
 	}
@@ -341,6 +386,38 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 			for (numSides : numSides_list)
 			{
 				test_polygonGenerate(center, numSides, sideLength);
+			}
+		}
+	}
+
+	SECTION("Spacer - PostScript Generation")
+	{
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+		point_t center = {0.0, 0.0};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_spacerGenerate(center, i, j);
+			}
+		}
+
+		center = {500.0, 500.0};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_spacerGenerate(center, i, j);
+			}
+		}
+
+		center = {-73.07333, 499.02001};
+		for (i : list)
+		{
+			for (j : list)
+			{
+				test_spacerGenerate(center, i, j);
 			}
 		}
 	}

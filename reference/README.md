@@ -1,7 +1,7 @@
-<!-- README.md -->
+<!-- reference/README.md -->
 # Reference
 
-This directory contains:
+This directory contains reference material for illustrative and demonstrative use.
 
-- An example of the desired compiled-to-PostScript output:
-    * desiredOutput.ps
+- desiredOutput.ps
+    * An example of the desired compiled-to-PostScript output.

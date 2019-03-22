@@ -51,6 +51,10 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/include/catch.hpp")
     # Define sources and executable
     set(TEST_EXECUTABLE_NAME catch_tests.out)
     add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCE_FILES})
+
+    enable_testing()
+    add_test(NAME TheOneTrueTest COMMAND catch_tests.out)
+
 else()
     message("Unable to create Testing Framework (include/catch.hpp does not exist)")
 endif()

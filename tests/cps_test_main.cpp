@@ -35,12 +35,7 @@
 // Helper Functions
 // *********************************************************************
 
-// userPause
-// Wait for user to press ENTER: read all chars through first newline.
-void userPause()
-{
-    while (std::cin.get() != '\n') ;
-}
+// Nothing here currently...
 
 
 // *********************************************************************
@@ -70,10 +65,6 @@ int main(int argc,
         std::cout << "END tests for "
                   << tname << std::endl << std::endl;
     }
-
-    // Wait for user
-    std::cout << "Press ENTER to quit ";
-    userPause();
 
     // Program return value is return code from Catch
     return catchresult;

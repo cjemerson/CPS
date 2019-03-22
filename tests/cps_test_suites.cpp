@@ -94,6 +94,21 @@ public:
 	}
 };
 
+// TestPolygon
+// Overrides evaluate to only spit out generate() at a known center. 
+class TestPolygon : public Polygon, public TestShape
+{
+public:
+	TestPolygon(unsigned int numSides, double sideLength)
+		: Polygon(numSides, sideLength), TestShape()
+	{ }
+
+	std::string evaluate() const override
+	{
+		return generate(_center);
+	}
+};
+
 
 // *********************************************************************
 // Helper Functions for this Test Program
@@ -110,7 +125,7 @@ void test_circleBoundingBox(double radius)
 {
 	Circle circle(radius);
 
-	INFO("A Circle with radius " << radius << " yields a bounding box with (" << 2 * radius << ", " << 2 * radius << ")");
+	INFO("A Circle with radius " << radius << " has a bounding box with (" << 2 * radius << ", " << 2 * radius << ")");
 	REQUIRE( circle.getBoundingBox().x == 2 * radius );
 	REQUIRE( circle.getBoundingBox().y == 2 * radius );
 }
@@ -118,9 +133,48 @@ void test_circleBoundingBox(double radius)
 void test_rectangleBoundingBox(double width, double height)
 {
 	Rectangle rectangle(width, height);
-	INFO("A Rectangle with width " << width << " and height " << height << "returns the correct bounding box with width " << width << " and height " << height);
+	INFO("A Rectangle with width " << width << " and height " << height << " has a bounding box with width " << width << " and height " << height);
 	REQUIRE( rectangle.getBoundingBox().x == width);
 	REQUIRE( rectangle.getBoundingBox().y == height);
+}
+
+void test_polygonBoundingBox(unsigned int numSides, double sideLength)
+{
+	Polygon polygon(numSides, sideLength);
+
+	double width, height;
+
+	const auto n = numSides;
+	const double e = sideLength;
+	const double pi = 3.14159265358979323846;
+
+	// Case 1: n is odd.
+	// height = e(1+cos(π/n))/(2sin(π/n))
+	// width = (e sin(π(n-1)/2n))/(sin(π/n))
+	if (n % 2 == 1)
+	{
+		height = e*(1+cos(pi/n))/(2*sin(pi/n));
+		width = (e*sin(pi*(n-1)/2*n))/(sin(pi/n));
+	}
+	// Case 2: n is divisible by 4.
+	// height = e(cos(π/n))/(sin(π/n))
+	// width = (e cos(π/n))/(sin(π/n))
+	else if (n % 4 == 0){
+		height = e*(cos(pi/n))/(sin(pi/n));
+		width = (e*cos(pi/n))/(sin(pi/n));
+	}
+	// Case 3: n is divisible by 2, but not by 4.
+	// height = e(cos(π/n))/(sin(π/n))
+	// width = e/(sin(π/n))
+	else
+	{
+		height = e*(cos(pi/n))/(sin(pi/n));
+		width = e/(sin(pi/n));
+	}
+
+	INFO("Polygon with " << numSides << " sides each of length " << sideLength << " has a bounding box with width " << width << " and height " << height);
+	REQUIRE(polygon.getBoundingBox().x == Approx(width));
+	REQUIRE(polygon.getBoundingBox().y == Approx(height));
 }
 
 void test_circleGenerate(point_t center, double radius)
@@ -143,6 +197,17 @@ void test_rectangleGenerate(point_t center, double width, double height)
 
 	INFO("Rectangle with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
 	REQUIRE( rectangle.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(width) + " " + to_string(height) + " rectangle\n" );
+}
+
+void test_polygonGenerate(point_t center, unsigned int numSides, double sideLength)
+{
+	using std::to_string;
+
+	TestPolygon polygon(numSides, sideLength);
+	polygon.setCenter(center);
+
+	INFO("Polygon with " << numSides << " sides each of length " << sideLength << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
+	REQUIRE( polygon.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(sideLength) + " " + to_string(numSides) + " polygon\n" );
 }
 
 
@@ -171,6 +236,20 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 			for (j : list)
 			{
 				test_rectangleBoundingBox(i, j);
+			}
+		}
+	}
+
+	SECTION("Polygon - Bounding Box")
+	{
+		auto sideLength_list = {0.25, 1.0, 50.0, 100.0, 500.0};
+		auto numSides_list = {3, 4, 5, 6, 8, 11, 19};
+
+		for (sideLength : sideLength_list)
+		{
+			for (numSides : numSides_list)
+			{
+				test_polygonBoundingBox(numSides, sideLength);
 			}
 		}
 	}
@@ -229,6 +308,39 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 			for (j : list)
 			{
 				test_rectangleGenerate(center, i, j);
+			}
+		}
+	}
+
+	SECTION("Polygon - PostScript Generation")
+	{
+		auto sideLength_list = {0.25, 1.0, 50.0, 100.0, 500.0};
+		auto numSides_list = {2, 3, 4, 5, 6, 8, 11, 19};
+
+		point_t center = {0.0, 0.0};
+		for (sideLength : sideLength_list)
+		{
+			for (numSides : numSides_list)
+			{
+				test_polygonGenerate(center, numSides, sideLength);
+			}
+		}
+
+		center = {500.0, 500.0};
+		for (sideLength : sideLength_list)
+		{
+			for (numSides : numSides_list)
+			{
+				test_polygonGenerate(center, numSides, sideLength);
+			}
+		}
+
+		center = {-73.07333, 499.02001};
+		for (sideLength : sideLength_list)
+		{
+			for (numSides : numSides_list)
+			{
+				test_polygonGenerate(center, numSides, sideLength);
 			}
 		}
 	}

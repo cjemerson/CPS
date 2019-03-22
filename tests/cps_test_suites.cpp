@@ -154,11 +154,12 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 {
 	SECTION("Circle - Bounding Box")
 	{
-		test_circleBoundingBox(0.25);
-		test_circleBoundingBox(1.0);
-		test_circleBoundingBox(50.0);
-		test_circleBoundingBox(100.0);
-		test_circleBoundingBox(500.0);
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+		for (i : list)
+		{
+			test_circleBoundingBox(i);
+		}
 	}
 
 	SECTION("Rectangle - Bounding Box")
@@ -179,26 +180,25 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 {
 	SECTION("Circle - PostScript Generation")
 	{
+		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
 		point_t center = {0.0, 0.0};
-		test_circleGenerate(center, 0.25);
-		test_circleGenerate(center, 1.0);
-		test_circleGenerate(center, 50.0);
-		test_circleGenerate(center, 100.0);
-		test_circleGenerate(center, 500.0);
+		for (i : list)
+		{
+			test_circleGenerate(center, i);
+		}
 
 		center = {500.0, 500.0};
-		test_circleGenerate(center, 0.25);
-		test_circleGenerate(center, 1.0);
-		test_circleGenerate(center, 50.0);
-		test_circleGenerate(center, 100.0);
-		test_circleGenerate(center, 500.0);
+		for (i : list)
+		{
+			test_circleGenerate(center, i);
+		}
 
 		center = {-73.07333, 499.02001};
-		test_circleGenerate(center, 0.25);
-		test_circleGenerate(center, 1.0);
-		test_circleGenerate(center, 50.0);
-		test_circleGenerate(center, 100.0);
-		test_circleGenerate(center, 500.0);
+		for (i : list)
+		{
+			test_circleGenerate(center, i);
+		}
 	}
 
 	SECTION("Rectangle - PostScript Generation")

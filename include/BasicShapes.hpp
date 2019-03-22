@@ -81,4 +81,25 @@ protected:
 };
 
 
+// *********************************************************************
+// Spacer Class
+// *********************************************************************
+
+class Spacer : public Shape {
+public:
+	Spacer(double width, double height);
+
+	virtual ~Spacer() = default;
+
+public:
+	virtual point_t getBoundingBox() const override;
+
+protected:
+	virtual std::string generate(point_t center) const override;
+
+protected:
+	double _width, _height;
+};
+
+
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

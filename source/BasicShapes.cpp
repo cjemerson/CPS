@@ -106,3 +106,22 @@ std::string Polygon::generate(point_t center) const
 			+ to_string(_sideLength) + " " + to_string(_numSides)
 			+ " polygon\n";
 }
+
+
+// *********************************************************************
+// Rectangle Class
+// *********************************************************************
+
+Spacer::Spacer(double width, double height)
+	: _width(width), _height(height)
+{ }
+
+point_t Spacer::getBoundingBox() const
+{
+	return {_width, _height};
+}
+
+std::string Spacer::generate(point_t center) const
+{
+	return "";
+}

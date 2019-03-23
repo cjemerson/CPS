@@ -109,7 +109,7 @@ std::string Polygon::generate(point_t center) const
 
 
 // *********************************************************************
-// Rectangle Class
+// Spacer Class
 // *********************************************************************
 
 Spacer::Spacer(double width, double height)

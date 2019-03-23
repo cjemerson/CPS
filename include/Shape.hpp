@@ -12,6 +12,7 @@
 #define FILE_SHAPE_HPP_INCLUDED
 
 #include <string>
+#include <memory>
 
 
 // *********************************************************************
@@ -29,6 +30,9 @@ struct point_t {
 // *********************************************************************
 
 class Shape {
+public:
+	using ptr_t = std::unique_ptr<Shape>;
+
 public:
 	virtual ~Shape() = default;
 

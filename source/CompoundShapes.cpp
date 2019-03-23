@@ -21,13 +21,25 @@ Rotated::Rotated(Shape::ptr_t shape, double angleInDegrees)
 
 point_t Rotated::getBoundingBox() const
 {
-	// @TODO
-	return {0.0, 0.0};
+	const double PI = 3.14159265358979323846;
+
+	double x = _shape->getBoundingBox({}).x;
+	double y = _shape->getBoundingBox({}).y;
+	double o = PI * _angleInDegrees / 180.0;
+
+	double height = abs(x * sin(o)) + abs(y * cos(o));
+	double width = abs(x * cos(o)) + abs(y * sin(o));
+
+	return {width, height};
 }
+
 std::string Rotated::generate(point_t center) const
 {
-	// @TODO
-	return "";
+	using std::to_string;
+
+	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
+			+ " " + to_string(_angleInDegrees) + " rotatedAbout\n"
+			+ _shape->generate(center, {}) + "grestore\n";
 }
 
 
@@ -42,14 +54,22 @@ Scaled::Scaled(Shape::ptr_t shape, double xScale, double yScale)
 
 point_t Scaled::getBoundingBox() const
 {
-	// @TODO
-	return {0.0, 0.0};
+	auto result = _shape->getBoundingBox({});
+
+	result.x *= _xScale;
+	result.y *= _yScale;
+
+	return result;
 }
 
 std::string Scaled::generate(point_t center) const
 {
-	// @TODO
-	return "";
+	using std::to_string;
+
+	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
+			+ " " + to_string(_xScale) + " " + to_string(_yScale)
+			+ " scaledAbout\n" + _shape->generate(center, {})
+			+ "grestore\n";
 }
 
 
@@ -64,14 +84,32 @@ Layered::Layered(std::vector<Shape::ptr_t> shapes)
 
 point_t Layered::getBoundingBox() const
 {
-	// @TODO
-	return {0.0, 0.0};
+	point_t result = {0.0, 0.0};
+
+	for (ptrToAShape : _shapes)
+	{
+		auto shapeBoundingBox = ptrToAShape->getBoundingBox({});
+
+		if (shapeBoundingBox.x > result.x)
+			result.x = shapeBoundingBox.x;
+
+		if (shapeBoundingBox.y > result.y)
+			result.y = shapeBoundingBox.y;
+	}
+
+	return result;
 }
 
 std::string Layered::generate(point_t center) const
 {
-	// @TODO
-	return "";
+	std::string output = "";
+
+	for (ptrToAShape : _shapes)
+	{
+		output += ptrToAShape->generate(center, {});
+	}
+
+	return output;
 }
 
 
@@ -86,12 +124,42 @@ Vertical::Vertical(std::vector<Shape::ptr_t> shapes)
 
 point_t Vertical::getBoundingBox() const
 {
-	// @TODO
-	return {0.0, 0.0};
+	point_t result;
+
+	for (ptrToAShape : _shapes)
+	{
+		auto shapeBoundingBox = ptrToAShape->getBoundingBox({}); 
+
+		// Output the largest width
+		if (shapeBoundingBox.x > result.x)
+			result.x = shapeBoundingBox.x;
+
+		// Sum the heights
+		result.y += shapeBoundingBox.y;
+	}
+
+	return result;
 }
+
 std::string Vertical::generate(point_t center) const
 {
-	return "";
+	auto height = getBoundingBox().y;
+
+	std::string output = "";
+
+	auto x = center.x;
+	auto y = center.y - (height / 2.0);
+
+	for (ptrToAShape : _shapes)
+	{
+		auto shapeHeight = ptrToAShape->getBoundingBox({}).y;
+
+		y += shapeHeight / 2.0;
+		output += ptrToAShape->generate({x, y}, {});
+		y += shapeHeight / 2.0;
+	}
+
+	return output;
 }
 
 
@@ -105,12 +173,40 @@ Horizontal::Horizontal(std::vector<Shape::ptr_t> shapes)
 
 point_t Horizontal::getBoundingBox() const
 {
-	// @TODO
-	return {0.0, 0.0};
+	point_t result;
+
+	for (ptrToAShape : _shapes)
+	{
+		auto shapeBoundingBox = ptrToAShape->getBoundingBox({}); 
+
+		// Sum the widths
+		result.x += shapeBoundingBox.x;
+
+		// Output the largest height
+		if (shapeBoundingBox.y > result.y)
+			result.y = shapeBoundingBox.y;
+	}
+
+	return result;
 }
 
 std::string Horizontal::generate(point_t center) const
 {
-	// @TODO
-	return "";
+	auto width = getBoundingBox().x;
+
+	std::string output = "";
+
+	auto x = center.x - (width / 2.0);
+	auto y = center.y;
+
+	for (ptrToAShape : _shapes)
+	{
+		auto shapeWidth = ptrToAShape->getBoundingBox({}).x;
+
+		x += shapeWidth / 2.0;
+		output += ptrToAShape->generate({x, y}, {});
+		x += shapeWidth / 2.0;
+	}
+
+	return output;
 }

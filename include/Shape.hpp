@@ -29,7 +29,10 @@ struct point_t {
 // (Abstract) Shape Class
 // *********************************************************************
 
-class Shape {
+class Shape {	
+private:
+	struct ShapeKey {};
+
 public:
 	using ptr_t = std::unique_ptr<Shape>;
 
@@ -41,9 +44,25 @@ public:
 	virtual std::string evaluate() const;
 
 public:
+	virtual point_t getBoundingBox(ShapeKey key) const
+	{
+		(void) key;
+
+		return getBoundingBox();
+	}
+
+	virtual std::string generate(point_t center, ShapeKey key) const
+	{
+		(void) key;
+
+		return generate(center);
+	}
+
+protected:
 	// A new type of shape needs to have these defined
 	virtual point_t getBoundingBox() const = 0;
 	virtual std::string generate(point_t center) const = 0;
+
 };
 
 

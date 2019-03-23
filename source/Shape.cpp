@@ -122,7 +122,7 @@ static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
 
 std::string Shape::evaluate() const
 {
-    const point_t center = {8.0*72.0/2.0, 11.5*72.0/2.0};
+    const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
 
     return POSTSCRIPT_HEADER + generate(center) + "\nshowpage\n";
 }

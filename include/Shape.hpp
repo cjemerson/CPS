@@ -40,7 +40,7 @@ public:
 	// To generate the PostScript to draw a Shape:
 	virtual std::string evaluate() const;
 
-protected:
+public:
 	// A new type of shape needs to have these defined
 	virtual point_t getBoundingBox() const = 0;
 	virtual std::string generate(point_t center) const = 0;

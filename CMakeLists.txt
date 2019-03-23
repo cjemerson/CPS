@@ -30,6 +30,7 @@ set(SOURCE_MAIN
 set(SOURCE_FILES
     source/Shape.cpp
     source/BasicShapes.cpp
+    source/CompoundShapes.cpp
 )
 
 # Define sources and main executable

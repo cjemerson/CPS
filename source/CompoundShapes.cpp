@@ -15,16 +15,18 @@
 // Rotated Class
 // *********************************************************************
 
-Rotated::Rotated(Shape::ptr_t shape, double angleInDegrees)
-	: _shape(std::move(shape)), _angleInDegrees(angleInDegrees)
+Rotated::Rotated(const Shape & shape, double angleInDegrees)
+	: _shape(shape), _angleInDegrees(angleInDegrees)
 { }
 
 point_t Rotated::getBoundingBox() const
 {
 	const double PI = 3.14159265358979323846;
 
-	double x = _shape->getBoundingBox({}).x;
-	double y = _shape->getBoundingBox({}).y;
+	// To access other Shapes' protected getBoundingBox need
+	// to pass a ShapeKey to the public getBoundingBox
+	double x = _shape.getBoundingBox({}).x;
+	double y = _shape.getBoundingBox({}).y;
 	double o = PI * _angleInDegrees / 180.0;
 
 	double height = abs(x * sin(o)) + abs(y * cos(o));
@@ -39,7 +41,7 @@ std::string Rotated::generate(point_t center) const
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
 			+ " " + to_string(_angleInDegrees) + " rotatedAbout\n"
-			+ _shape->generate(center, {}) + "grestore\n";
+			+ _shape.generate(center, {}) + "grestore\n";
 }
 
 
@@ -47,14 +49,16 @@ std::string Rotated::generate(point_t center) const
 // Scaled Class
 // *********************************************************************
 
-Scaled::Scaled(Shape::ptr_t shape, double xScale, double yScale)
-	: _shape(std::move(shape)), _xScale(xScale), _yScale(yScale)
+Scaled::Scaled(const Shape & shape, double xScale, double yScale)
+	: _shape(shape), _xScale(xScale), _yScale(yScale)
 { }
 
 
 point_t Scaled::getBoundingBox() const
 {
-	auto result = _shape->getBoundingBox({});
+	// To access other Shapes' protected getBoundingBox need
+	// to pass a ShapeKey to the public getBoundingBox
+	auto result = _shape.getBoundingBox({});
 
 	result.x *= _xScale;
 	result.y *= _yScale;
@@ -68,7 +72,7 @@ std::string Scaled::generate(point_t center) const
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
 			+ " " + to_string(_xScale) + " " + to_string(_yScale)
-			+ " scaledAbout\n" + _shape->generate(center, {})
+			+ " scaledAbout\n" + _shape.generate(center, {})
 			+ "grestore\n";
 }
 
@@ -78,17 +82,23 @@ std::string Scaled::generate(point_t center) const
 // Layered Class
 // *********************************************************************
 
-Layered::Layered(std::vector<Shape::ptr_t> shapes)
-	: _shapes(std::move(shapes))
+Layered::Layered(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+	: _shapeReferences(std::move(shapeReferences))
 { }
 
 point_t Layered::getBoundingBox() const
 {
 	point_t result = {0.0, 0.0};
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		auto shapeBoundingBox = ptrToAShape->getBoundingBox({});
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		auto shapeBoundingBox = shape.getBoundingBox({});
 
 		if (shapeBoundingBox.x > result.x)
 			result.x = shapeBoundingBox.x;
@@ -104,9 +114,15 @@ std::string Layered::generate(point_t center) const
 {
 	std::string output = "";
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		output += ptrToAShape->generate(center, {});
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		output += shape.generate(center, {});
 	}
 
 	return output;
@@ -117,8 +133,8 @@ std::string Layered::generate(point_t center) const
 // Vertical Class
 // *********************************************************************
 
-Vertical::Vertical(std::vector<Shape::ptr_t> shapes)
-	: _shapes(std::move(shapes))
+Vertical::Vertical(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+	: _shapeReferences(std::move(shapeReferences))
 { }
 
 
@@ -126,9 +142,15 @@ point_t Vertical::getBoundingBox() const
 {
 	point_t result;
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		auto shapeBoundingBox = ptrToAShape->getBoundingBox({}); 
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		auto shapeBoundingBox = shape.getBoundingBox({});
 
 		// Output the largest width
 		if (shapeBoundingBox.x > result.x)
@@ -150,12 +172,18 @@ std::string Vertical::generate(point_t center) const
 	auto x = center.x;
 	auto y = center.y - (height / 2.0);
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		auto shapeHeight = ptrToAShape->getBoundingBox({}).y;
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		auto shapeHeight = shape.getBoundingBox({}).y;
 
 		y += shapeHeight / 2.0;
-		output += ptrToAShape->generate({x, y}, {});
+		output += shape.generate({x, y}, {});
 		y += shapeHeight / 2.0;
 	}
 
@@ -167,17 +195,23 @@ std::string Vertical::generate(point_t center) const
 // Horizontal Class
 // *********************************************************************
 
-Horizontal::Horizontal(std::vector<Shape::ptr_t> shapes)
-	: _shapes(std::move(shapes))
+Horizontal::Horizontal(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+	: _shapeReferences(std::move(shapeReferences))
 { }
 
 point_t Horizontal::getBoundingBox() const
 {
 	point_t result;
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		auto shapeBoundingBox = ptrToAShape->getBoundingBox({}); 
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		auto shapeBoundingBox = shape.getBoundingBox({});
 
 		// Sum the widths
 		result.x += shapeBoundingBox.x;
@@ -199,12 +233,18 @@ std::string Horizontal::generate(point_t center) const
 	auto x = center.x - (width / 2.0);
 	auto y = center.y;
 
-	for (ptrToAShape : _shapes)
+	for (shapeReference : _shapeReferences)
 	{
-		auto shapeWidth = ptrToAShape->getBoundingBox({}).x;
+		// To use list of Shapes needed reference_wrapper<const Shape>
+		// which is dereferenced with get()
+		const Shape & shape = shapeReference.get();
+
+		// To access other Shapes' protected getBoundingBox need
+		// to pass a ShapeKey to the public getBoundingBox
+		auto shapeWidth = shape.getBoundingBox({}).x;
 
 		x += shapeWidth / 2.0;
-		output += ptrToAShape->generate({x, y}, {});
+		output += shape.generate({x, y}, {});
 		x += shapeWidth / 2.0;
 	}
 

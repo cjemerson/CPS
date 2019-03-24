@@ -11,13 +11,18 @@
 #include <iostream>
 
 #include "BasicShapes.hpp"
+#include "CompoundShapes.hpp"
 
 
 int main(int argc, char const *argv[])
 {
-	Circle a(150.0);
+	auto a = Circle(80.0);
+	auto b = Polygon(4, 160.0);
 
-	std::cout << a.evaluate() << std::endl;
+	auto c = Layered({a, b});
+	auto d = Horizontal({c, c, c});
+
+	std::cout << d.evaluate() << std::endl;
 
 	return 0;
 }

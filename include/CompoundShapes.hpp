@@ -12,6 +12,12 @@
 #define FILE_COMPOUNDSHAPES_HPP_INCLUDED
 
 
+#include <initializer_list>
+// For std::initializer_list
+
+#include <functional>
+// For std::reference_wrapper
+
 #include <vector>
 // For std::vector
 
@@ -30,7 +36,7 @@
 
 class Rotated : public Shape {
 public:
-	Rotated(Shape::ptr_t shape, double angleInDegrees);
+	Rotated(const Shape & shape, double angleInDegrees);
 
 	virtual ~Rotated() = default;
 
@@ -39,7 +45,7 @@ protected:
 	virtual std::string generate(point_t center) const override;
 
 protected:
-	Shape::ptr_t _shape;
+	const Shape & _shape;
 	double _angleInDegrees;
 };
 
@@ -50,7 +56,7 @@ protected:
 
 class Scaled : public Shape {
 public:
-	Scaled(Shape::ptr_t shape, double xScale, double yScale);
+	Scaled(const Shape & shape, double xScale, double yScale);
 
 	virtual ~Scaled() = default;
 
@@ -59,7 +65,7 @@ protected:
 	virtual std::string generate(point_t center) const override;
 
 protected:
-	Shape::ptr_t _shape;
+	const Shape & _shape;
 	double _xScale, _yScale;
 };
 
@@ -70,7 +76,7 @@ protected:
 
 class Layered : public Shape {
 public:
-	Layered(std::vector<Shape::ptr_t> shapes);
+	Layered(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Layered() = default;
 
@@ -79,17 +85,17 @@ protected:
 	virtual std::string generate(point_t center) const override;
 
 protected:
-	std::vector<Shape::ptr_t> _shapes;
+	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
 };
 
 
-// *********************************************************************
-// Vertical Class
-// *********************************************************************
+// // *********************************************************************
+// // Vertical Class
+// // *********************************************************************
 
 class Vertical : public Shape {
 public:
-	Vertical(std::vector<Shape::ptr_t> shapes);
+	Vertical(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Vertical() = default;
 
@@ -98,17 +104,17 @@ protected:
 	virtual std::string generate(point_t center) const override;
 
 protected:
-	std::vector<Shape::ptr_t> _shapes;
+	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
 };
 
 
-// *********************************************************************
-// Horizontal Class
-// *********************************************************************
+// // *********************************************************************
+// // Horizontal Class
+// // *********************************************************************
 
 class Horizontal : public Shape {
 public:
-	Horizontal(std::vector<Shape::ptr_t> shapes);
+	Horizontal(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Horizontal() = default;
 
@@ -117,7 +123,7 @@ protected:
 	virtual std::string generate(point_t center) const override;
 
 protected:
-	std::vector<Shape::ptr_t> _shapes;
+	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
 };
 
 

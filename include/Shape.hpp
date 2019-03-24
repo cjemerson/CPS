@@ -34,9 +34,6 @@ private:
 	struct ShapeKey {};
 
 public:
-	using ptr_t = std::unique_ptr<Shape>;
-
-public:
 	virtual ~Shape() = default;
 
 public:

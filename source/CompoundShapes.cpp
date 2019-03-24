@@ -40,7 +40,7 @@ std::string Rotated::generate(point_t center) const
 	using std::to_string;
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
-			+ " " + to_string(_angleInDegrees) + " rotatedAbout\n"
+			+ " " + to_string(_angleInDegrees) + " rotateAbout\n"
 			+ _shape.generate(center, {}) + "grestore\n";
 }
 
@@ -72,7 +72,7 @@ std::string Scaled::generate(point_t center) const
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
 			+ " " + to_string(_xScale) + " " + to_string(_yScale)
-			+ " scaledAbout\n" + _shape.generate(center, {})
+			+ " scaleAbout\n" + _shape.generate(center, {})
 			+ "grestore\n";
 }
 

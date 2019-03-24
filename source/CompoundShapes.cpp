@@ -140,7 +140,7 @@ Vertical::Vertical(std::initializer_list<std::reference_wrapper<const Shape>> sh
 
 point_t Vertical::getBoundingBox() const
 {
-	point_t result;
+	point_t result = {0.0, 0.0};
 
 	for (shapeReference : _shapeReferences)
 	{
@@ -201,7 +201,7 @@ Horizontal::Horizontal(std::initializer_list<std::reference_wrapper<const Shape>
 
 point_t Horizontal::getBoundingBox() const
 {
-	point_t result;
+	point_t result = {0.0, 0.0};
 
 	for (shapeReference : _shapeReferences)
 	{

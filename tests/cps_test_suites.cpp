@@ -253,7 +253,7 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 	{
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
-		for (i : list)
+		for (auto i : list)
 		{
 			test_circleBoundingBox(i);
 		}
@@ -263,9 +263,9 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 	{
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_rectangleBoundingBox(i, j);
 			}
@@ -277,9 +277,9 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 		auto sideLength_list = {0.25, 1.0, 50.0, 100.0, 500.0};
 		auto numSides_list = {3, 4, 5, 6, 8, 11, 19};
 
-		for (sideLength : sideLength_list)
+		for (auto sideLength : sideLength_list)
 		{
-			for (numSides : numSides_list)
+			for (auto numSides : numSides_list)
 			{
 				test_polygonBoundingBox(numSides, sideLength);
 			}
@@ -290,9 +290,9 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]")
 	{
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_spacerBoundingBox(i, j);
 			}
@@ -307,19 +307,19 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
 		point_t center = {0.0, 0.0};
-		for (i : list)
+		for (auto i : list)
 		{
 			test_circleGenerate(center, i);
 		}
 
 		center = {500.0, 500.0};
-		for (i : list)
+		for (auto i : list)
 		{
 			test_circleGenerate(center, i);
 		}
 
 		center = {-73.07333, 499.02001};
-		for (i : list)
+		for (auto i : list)
 		{
 			test_circleGenerate(center, i);
 		}
@@ -330,27 +330,27 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
 		point_t center = {0.0, 0.0};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_rectangleGenerate(center, i, j);
 			}
 		}
 
 		center = {500.0, 500.0};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_rectangleGenerate(center, i, j);
 			}
 		}
 
 		center = {-73.07333, 499.02001};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_rectangleGenerate(center, i, j);
 			}
@@ -363,27 +363,27 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 		auto numSides_list = {2, 3, 4, 5, 6, 8, 11, 19};
 
 		point_t center = {0.0, 0.0};
-		for (sideLength : sideLength_list)
+		for (auto sideLength : sideLength_list)
 		{
-			for (numSides : numSides_list)
+			for (auto numSides : numSides_list)
 			{
 				test_polygonGenerate(center, numSides, sideLength);
 			}
 		}
 
 		center = {500.0, 500.0};
-		for (sideLength : sideLength_list)
+		for (auto sideLength : sideLength_list)
 		{
-			for (numSides : numSides_list)
+			for (auto numSides : numSides_list)
 			{
 				test_polygonGenerate(center, numSides, sideLength);
 			}
 		}
 
 		center = {-73.07333, 499.02001};
-		for (sideLength : sideLength_list)
+		for (auto sideLength : sideLength_list)
 		{
-			for (numSides : numSides_list)
+			for (auto numSides : numSides_list)
 			{
 				test_polygonGenerate(center, numSides, sideLength);
 			}
@@ -395,27 +395,27 @@ TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
 		auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
 
 		point_t center = {0.0, 0.0};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_spacerGenerate(center, i, j);
 			}
 		}
 
 		center = {500.0, 500.0};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_spacerGenerate(center, i, j);
 			}
 		}
 
 		center = {-73.07333, 499.02001};
-		for (i : list)
+		for (auto i : list)
 		{
-			for (j : list)
+			for (auto j : list)
 			{
 				test_spacerGenerate(center, i, j);
 			}

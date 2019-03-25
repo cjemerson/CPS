@@ -90,7 +90,7 @@ point_t Layered::getBoundingBox() const
 {
 	point_t result = {0.0, 0.0};
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()
@@ -114,7 +114,7 @@ std::string Layered::generate(point_t center) const
 {
 	std::string output = "";
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()
@@ -142,7 +142,7 @@ point_t Vertical::getBoundingBox() const
 {
 	point_t result = {0.0, 0.0};
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()
@@ -172,7 +172,7 @@ std::string Vertical::generate(point_t center) const
 	auto x = center.x;
 	auto y = center.y - (height / 2.0);
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()
@@ -203,7 +203,7 @@ point_t Horizontal::getBoundingBox() const
 {
 	point_t result = {0.0, 0.0};
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()
@@ -233,7 +233,7 @@ std::string Horizontal::generate(point_t center) const
 	auto x = center.x - (width / 2.0);
 	auto y = center.y;
 
-	for (shapeReference : _shapeReferences)
+	for (auto shapeReference : _shapeReferences)
 	{
 		// To use list of Shapes needed reference_wrapper<const Shape>
 		// which is dereferenced with get()

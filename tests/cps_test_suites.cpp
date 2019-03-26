@@ -1,12 +1,6 @@
 // cps_test_suites.cpp
-// Original Author:
-//   Glenn G. Chappell
 //
-// Modified Authors:
-//   Charles Emerson
-//
-// Created: 20 Mar 2019 (from da6_test_suites.cpp)
-// Updated: 20 Mar 2019
+// Created from da6_test_main.cpp by Glenn G. Chappell.
 //
 // For CS 372 Spring 2019
 // Tests for Project 2 CPS: test suites.

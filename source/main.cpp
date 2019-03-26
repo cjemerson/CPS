@@ -1,9 +1,4 @@
 // main.cpp
-// Authors:
-//   Charles Emerson
-//
-// Created: 19 Mar 2019
-// Updated: 20 Mar 2019
 //
 // Simple main to test compilation.
 

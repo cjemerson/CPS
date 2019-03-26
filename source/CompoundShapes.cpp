@@ -1,9 +1,4 @@
 // CompoundShapes.cpp
-// Authors:
-//   Charles Emerson
-//
-// Created: 22 Mar 2019
-// Updated: 22 Mar 2019
 //
 // Compound Shapes Source.
 

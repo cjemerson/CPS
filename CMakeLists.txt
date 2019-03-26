@@ -1,9 +1,4 @@
 # CMakeLists.txt
-# Authors:
-#   Charles Emerson
-#
-# Created: 20 Mar 2019
-# Updated: 20 Mar 2019
 
 
 ########################################################################

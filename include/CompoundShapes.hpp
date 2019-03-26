@@ -12,9 +12,6 @@
 #define FILE_COMPOUNDSHAPES_HPP_INCLUDED
 
 
-#include <initializer_list>
-// For std::initializer_list
-
 #include <functional>
 // For std::reference_wrapper
 
@@ -76,7 +73,7 @@ protected:
 
 class Layered : public Shape {
 public:
-	Layered(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
+	Layered(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Layered() = default;
 
@@ -95,7 +92,7 @@ protected:
 
 class Vertical : public Shape {
 public:
-	Vertical(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
+	Vertical(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Vertical() = default;
 
@@ -114,7 +111,7 @@ protected:
 
 class Horizontal : public Shape {
 public:
-	Horizontal(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences);
+	Horizontal(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Horizontal() = default;
 

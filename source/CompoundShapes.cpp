@@ -82,7 +82,7 @@ std::string Scaled::generate(point_t center) const
 // Layered Class
 // *********************************************************************
 
-Layered::Layered(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+Layered::Layered(std::vector<std::reference_wrapper<const Shape>> shapeReferences)
 	: _shapeReferences(std::move(shapeReferences))
 { }
 
@@ -133,7 +133,7 @@ std::string Layered::generate(point_t center) const
 // Vertical Class
 // *********************************************************************
 
-Vertical::Vertical(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+Vertical::Vertical(std::vector<std::reference_wrapper<const Shape>> shapeReferences)
 	: _shapeReferences(std::move(shapeReferences))
 { }
 
@@ -195,7 +195,7 @@ std::string Vertical::generate(point_t center) const
 // Horizontal Class
 // *********************************************************************
 
-Horizontal::Horizontal(std::initializer_list<std::reference_wrapper<const Shape>> shapeReferences)
+Horizontal::Horizontal(std::vector<std::reference_wrapper<const Shape>> shapeReferences)
 	: _shapeReferences(std::move(shapeReferences))
 { }
 

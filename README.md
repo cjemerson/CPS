@@ -7,6 +7,7 @@ CS 372 Project 2 -- Michael Bilan, Bradley Morton and Charles Emerson
 2. [Success Criteria](#success-criteria)
 3. [Steps to Compile and Run the Main Program](#steps-to-compile-and-run-the-main-program)
 4. [Steps to Compile and Run the Testing Framework](#steps-to-compile-and-run-the-testing-framework)
+5. [Documentation](#documentation)
 
 ## Introduction
 This is a Software Construction exercise in design patterns. The goal of this project is to design and implement a high-level C++ shapes-language to PostScript translator.
@@ -26,8 +27,8 @@ Success occurs when the following are implemented and tested:
 - Rotated(Shape shape, RotationAngle rotationAngle)
 - Scaled(Shape shape, double xScale, double yScale)
 - Layered(Shape ... shapes)
-- VerticallyStackedUp(Shape ... shapes)
-- HorizontallyStackedRight(Shape ... shapes)
+- Vertical(Shape ... shapes)
+- Horizontal(Shape ... shapes)
 
 ## Steps to Compile and Run the Main Program
 (This method requires CMake 2.6 or later to be installed)
@@ -47,3 +48,6 @@ Success occurs when the following are implemented and tested:
 4. `cmake ..`
 5. `make`
 6. Run `./catch_tests.out`
+
+## Documentation
+See the official [documentation](reference/DOCUMENTATION.md).

@@ -12,7 +12,6 @@
 
 static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
 % output.ps
-% Created: )") + std::string(__DATE__) + std::string(R"(
 % 
 % Created using CPS.
 % https://www.github.com/cjemerson/CPS

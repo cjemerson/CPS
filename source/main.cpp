@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 	auto c = Layered({a, b});
 	auto d = Horizontal({c, c, c});
 
-	std::cout << d.evaluate() << std::endl;
+	std::cout << d.evaluatePostScript() << std::endl;
 
 	return 0;
 }

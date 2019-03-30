@@ -10,9 +10,10 @@
 // PostScript Header for Output
 // *********************************************************************
 
-static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
+std::string getPostScriptHeader(){
+    return std::string(R"(%!
 % output.ps
-% 
+%
 % Created using CPS.
 % https://www.github.com/cjemerson/CPS
 
@@ -108,15 +109,16 @@ static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 )");
+}
 
 
 // *********************************************************************
 // Shape Class Source
 // *********************************************************************
 
-std::string Shape::evaluate() const
+std::string Shape::evaluatePostScript() const
 {
     const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
 
-    return POSTSCRIPT_HEADER + generate(center) + "\nshowpage\n";
+    return getPostScriptHeader() + generatePostScript(center) + "\nshowpage\n";
 }

@@ -6,7 +6,7 @@
 #ifndef FILE_BASICSHAPES_HPP_INCLUDED
 #define FILE_BASICSHAPES_HPP_INCLUDED
 
-#include <math.h>
+#include <cmath>
 // For sin, cos in Polygon getBoundingBox()
 
 #include "Shape.hpp"
@@ -18,15 +18,15 @@
 
 class Circle : public Shape {
 public:
-	Circle(double radius);
+	explicit Circle(double radius);
 
-	virtual ~Circle() = default;
+	~Circle() override = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _radius;
@@ -41,13 +41,13 @@ class Rectangle : public Shape {
 public:
 	Rectangle(double width, double height);
 
-	virtual ~Rectangle() = default;
+	~Rectangle() override = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _width, _height;
@@ -62,13 +62,13 @@ class Polygon : public Shape {
 public:
 	Polygon(unsigned int numSides, double sideLength);
 
-	virtual ~Polygon() = default;
+	~Polygon() override = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _sideLength;
@@ -84,13 +84,13 @@ class Spacer : public Shape {
 public:
 	Spacer(double width, double height);
 
-	virtual ~Spacer() = default;
+	~Spacer() override = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _width, _height;
@@ -103,8 +103,8 @@ protected:
 // *******************************************************************
 class Square : public Rectangle {
 public:
-	Square(double length);
-	virtual ~Square() = default;
+	explicit Square(double length);
+	~Square() override = default;
 
 };
 
@@ -114,8 +114,8 @@ public:
 // *******************************************************************
 class Triangle : public Polygon{
 public:
-	Triangle(double length);
-	virtual ~Triangle()=default;
+	explicit Triangle(double length);
+	~Triangle() override =default;
 };
 
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

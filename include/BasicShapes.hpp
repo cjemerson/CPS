@@ -106,7 +106,7 @@ public:
 	Square(double length);
 	virtual ~Square() = default;
 
-}
+};
 
 
 // *******************************************************************
@@ -115,7 +115,7 @@ public:
 class Triangle : public Polygon{
 public:
 	Triangle(double length);
-	virtual ~Triangle()=default
-}
+	virtual ~Triangle()=default;
+};
 
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

@@ -123,8 +123,8 @@ std::string Spacer::generate(point_t center) const
 
 
 
-Square::Square(double sideLength):_width(sideLength), _height(sideLength)
+Square::Square(double sideLength): Rectangle(sideLength, sideLength)
 {}
 
-Triangle::Triangle(double length):_numSides(3), _sideLength(length)
+Triangle::Triangle(double length): Polygon(3, length)
 {}

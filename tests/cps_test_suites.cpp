@@ -30,9 +30,6 @@
 #include <string>
 // For std::string, std::to_string
 
-#include <utility>
-// For std::swap
-
 // *********************************************************************
 // Helper Classes for this Test Program
 // *********************************************************************

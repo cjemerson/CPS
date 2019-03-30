@@ -97,4 +97,25 @@ protected:
 };
 
 
+
+// *******************************************************************
+// Rectangle Class
+// *******************************************************************
+class Square : public Rectangle {
+public:
+	Square(double length);
+	virtual ~Square() = default;
+
+}
+
+
+// *******************************************************************
+// Triangle Class
+// *******************************************************************
+class Triangle : public Polygon{
+public:
+	Triangle(double length);
+	virtual ~Triangle()=default
+}
+
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

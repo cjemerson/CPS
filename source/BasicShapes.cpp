@@ -120,3 +120,11 @@ std::string Spacer::generate(point_t center) const
 {
 	return "";
 }
+
+
+
+Square::Square(double sideLength):_width(sideLength), _height(sideLength)
+{}
+
+Triangle::Triangle(double length):_numSides(3), _sideLength(length)
+{}

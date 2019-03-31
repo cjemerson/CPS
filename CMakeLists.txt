@@ -19,7 +19,7 @@ include_directories("include")
 # Define main source which does not get included in the testing
 set(SOURCE_MAIN
     source/main.cpp
-)
+        source/Utilities.cpp)
 
 # Define all sources which may get included in the testing
 set(SOURCE_FILES
@@ -42,7 +42,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/include/catch.hpp")
         tests/cps_test_main.cpp
         tests/cps_test_suites.cpp
         ${SOURCE_FILES}
-    )
+            include/Utilities.h include/Utilities.h)
 
     # Define sources and executable
     set(TEST_EXECUTABLE_NAME catch_tests.out)

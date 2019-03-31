@@ -1,13 +1,12 @@
 // main.cpp
 //
-// Simple main to test compilation.
+// Simple main to generate shapes.
 
 
 #include <iostream>
-
 #include "BasicShapes.hpp"
 #include "CompoundShapes.hpp"
-
+#include "Utilities.h"
 
 int main(int argc, char const *argv[])
 {
@@ -17,7 +16,6 @@ int main(int argc, char const *argv[])
 	auto c = Layered({a, b});
 	auto d = Horizontal({c, c, c});
 
-	std::cout << d.evaluatePostScript() << std::endl;
     makePostScriptFile(d, "anotherTestFile");
 
 	return 0;

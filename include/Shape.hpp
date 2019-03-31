@@ -8,12 +8,8 @@
 
 #include <string>
 #include <memory>
-
-// *********************************************************************
-// Utility Functions
-// *********************************************************************
-
-std::string getPostScriptHeader();
+#include <iostream>
+#include <fstream>
 
 // *********************************************************************
 // Point Type
@@ -62,5 +58,12 @@ protected:
 
 };
 
+// *********************************************************************
+// Utility Functions
+// *********************************************************************
+
+std::string getPostScriptHeader();
+
+void makePostScriptFile(const Shape & shape, std::string filename);
 
 #endif // #ifndef FILE_SHAPE_HPP_INCLUDED

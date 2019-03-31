@@ -7,10 +7,22 @@
 
 
 // *********************************************************************
-// PostScript Header for Output
+// Shape Class Source
 // *********************************************************************
 
-std::string getPostScriptHeader(){
+std::string Shape::evaluatePostScript() const
+{
+    const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
+
+    return getPostScriptHeader() + generatePostScript(center) + "\nshowpage\n";
+}
+
+// *********************************************************************
+// Utility Functions
+// *********************************************************************
+
+std::string getPostScriptHeader()
+{
     return std::string(R"(%!
 % output.ps
 %
@@ -111,14 +123,9 @@ std::string getPostScriptHeader(){
 )");
 }
 
-
-// *********************************************************************
-// Shape Class Source
-// *********************************************************************
-
-std::string Shape::evaluatePostScript() const
-{
-    const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
-
-    return getPostScriptHeader() + generatePostScript(center) + "\nshowpage\n";
+void makePostScriptFile(const Shape &shape, std::string filename) {
+    std::ofstream file;
+    file.open("../testfiles/" + filename + ".ps");
+    file << shape.evaluatePostScript();
+    file.close();
 }

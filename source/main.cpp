@@ -18,6 +18,7 @@ int main(int argc, char const *argv[])
 	auto d = Horizontal({c, c, c});
 
 	std::cout << d.evaluatePostScript() << std::endl;
+    makePostScriptFile(d, "anotherTestFile");
 
 	return 0;
 }

@@ -80,6 +80,30 @@ auto rectangle = Rectangle(80.0, 40.0);
 ```
 
 
+### Square
+
+Interface: `Square(double sideLength)`
+
+Description: A square with the given side length.
+
+Example:
+```cpp
+auto rectangle = Square(80.0);
+```
+
+
+### Triangle
+
+Interface: `Triangle(double sideLength)`
+
+Description: A triangle with the given side length.
+
+Example:
+```cpp
+auto rectangle = Triangle(80.0);
+```
+
+
 ### Polygon
 
 Interface: `Polygon(unsigned int numSides, double sideLength)`

@@ -197,3 +197,14 @@ auto circle = Circle(40.0);
 auto spacer = Spacer(40.0, 40.0);
 auto horizontal = Horizontal( { circle, spacer, circle } );
 ```
+
+### Ellipse
+
+Interface: `Ellipse(double xRadius, double yRadius)`
+
+Description: An ellipse with the given x and y radii.
+
+Example:
+```cpp
+auto ellipse = Ellipse(80, 40.0);
+```

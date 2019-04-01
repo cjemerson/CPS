@@ -23,8 +23,8 @@ This is a Software Construction exercise in design patterns. The goal of this pr
 | Circle     | :heavy_check_mark: | :heavy_check_mark:                  | :heavy_check_mark:                | :heavy_check_mark: |
 | Polygon    | :heavy_check_mark: | :heavy_check_mark:                  | :heavy_check_mark:                | :heavy_check_mark: |
 | Spacer     | :heavy_check_mark: | :heavy_check_mark:                  | :heavy_check_mark:                | :heavy_check_mark: |
-| Square     | :x:                | :x:                                 | :x:                               | :x:                |
-| Triangle   | :x:                | :x:                                 | :x:                               | :x:                |
+| Square     | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
+| Triangle   | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
 
 #### Compound Shapes
 |            | Does it exist?     | Does it pass the bounding box test? | Does it pass the PostScript test? | Is it documented?  |
@@ -37,11 +37,11 @@ This is a Software Construction exercise in design patterns. The goal of this pr
 
 #### Advanced Shapes
 |                | Does it exist? | Does it pass the bounding box test? | Does it pass the PostScript test? | Is it documented? |
-| :---           | :---:          | :---:                               | :---:                             | :---:             |
-| Star           | :x:            | :x:                                 | :x:                               | :x:               |
-| Ellipse        | :x:            | :x:                                 | :x:                               | :x:               |
-| Diamond        | :x:            | :x:                                 | :x:                               | :x:               |
-| Right-Triangle | :x:            | :x:                                 | :x:                               | :x:               |
+| :---           | :---:            | :---:                               | :---:                               | :---:             |
+| Star           | :x:              | :x:                                 | :x:                                 | :x:               |
+| Ellipse        |:heavy_check_mark:| :x:                                 | :x:                                 |:heavy_check_mark: |
+| Diamond        | :x:              | :x:                                 | :x:                                 | :x:               |
+| Right-Triangle | :x:              | :x:                                 | :x:                                 | :x:               |
 
 
 ## Steps to Compile and Run the Main Program

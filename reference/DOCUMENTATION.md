@@ -17,6 +17,8 @@
     * [Layered](#layered)
     * [Vertical](#vertical)
     * [Horizontal](#horizontal)
+* [Advanced Shapes](#advanced-shapes)
+    * [Ellipse](#ellipse)
 
 ## Important Notes
 
@@ -77,6 +79,30 @@ Description: A rectangle with the given width and height.
 Example:
 ```cpp
 auto rectangle = Rectangle(80.0, 40.0);
+```
+
+
+### Square
+
+Interface: `Square(double sideLength)`
+
+Description: A square with the given side length.
+
+Example:
+```cpp
+auto square = Square(80.0);
+```
+
+
+### Triangle
+
+Interface: `Triangle(double sideLength)`
+
+Description: A triangle with the given side length.
+
+Example:
+```cpp
+auto triangle = Triangle(80.0);
 ```
 
 
@@ -172,4 +198,17 @@ Example:
 auto circle = Circle(40.0);
 auto spacer = Spacer(40.0, 40.0);
 auto horizontal = Horizontal( { circle, spacer, circle } );
+```
+
+## Advanced Shapes
+
+### Ellipse
+
+Interface: `Ellipse(double xRadius, double yRadius)`
+
+Description: An ellipse with the given x and y radii.
+
+Example:
+```cpp
+auto ellipse = Ellipse(80.0, 40.0);
 ```

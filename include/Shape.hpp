@@ -1,3 +1,4 @@
+
 // Shape.hpp
 //
 // Basic Shapes Source.
@@ -9,7 +10,6 @@
 #include <string>
 #include <memory>
 #include <iostream>
-#include <fstream>
 
 // *********************************************************************
 // Point Type
@@ -57,13 +57,5 @@ protected:
 	virtual std::string generatePostScript(point_t center) const = 0;
 
 };
-
-// *********************************************************************
-// Utility Functions
-// *********************************************************************
-
-std::string getPostScriptHeader();
-
-void makePostScriptFile(const Shape & shape, std::string filename);
 
 #endif // #ifndef FILE_SHAPE_HPP_INCLUDED

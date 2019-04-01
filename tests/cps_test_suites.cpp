@@ -205,4 +205,37 @@ TEST_CASE( "Basic Shapes - PostScript File Generation", "[BasicShapes][PostScrip
 		test_shapePostScriptGeneration("SquareL45.5.ps", testSquare1);
 		test_shapePostScriptGeneration("SquareL120.ps", testSquare2);
 	}
+
+	SECTION("Triangle - PostScript File Generation")
+	{
+		INFO("Checking Triangle - L=60");
+		auto testTriangle = Triangle(60.0);
+		test_shapePostScriptGeneration("TriangleS60.ps", testTriangle);
+	}
+}
+
+TEST_CASE( "Compound Shapes - PostScript File Generation", "[CompoundShapes][PostScript]")
+{
+	SECTION("Rotated - PostScript File Generation")
+	{
+		INFO("Checking Rotated Shape - Square L=40 A=45, Triangle L=50 A=180");
+		auto testSquare = Square(40);
+		auto testTriangle = Triangle(50);
+		auto testRotateSquare = Rotated(testSquare, 45);
+		auto testRotateTriangle = Rotated(testTriangle, 180);
+		test_shapePostScriptGeneration("RotatedSquareS40A45.ps", testRotateSquare);
+		test_shapePostScriptGeneration("RotatedTriangleS50A180.ps", testRotateTriangle);
+	}
+
+	SECTION("Scaled - PostScript File Generation")
+	{}
+
+	SECTION("Layered - PostScript File Generation")
+	{}
+
+	SECTION("Vertical - PostScript File Generation")
+	{}
+
+	SECTION("Horizontal - PostScript File Generation")
+	{}
 }

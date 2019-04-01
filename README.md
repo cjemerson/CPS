@@ -29,11 +29,11 @@ This is a Software Construction exercise in design patterns. The goal of this pr
 #### Compound Shapes
 |            | Does it exist?     | Does it pass the bounding box test? | Does it pass the PostScript test? | Is it documented?  |
 | :---       | :---:              | :---:                               | :---:                             | :---:              |
-| Rotated    | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
-| Scaled     | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
-| Layered    | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
-| Vertical   | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
-| Horizontal | :heavy_check_mark: | :x:                                 | :x:                               | :heavy_check_mark: |
+| Rotated    | :heavy_check_mark: | :x:                                 | :heavy_check_mark:                | :heavy_check_mark: |
+| Scaled     | :heavy_check_mark: | :x:                                 | :heavy_check_mark:                | :heavy_check_mark: |
+| Layered    | :heavy_check_mark: | :x:                                 | :heavy_check_mark:                | :heavy_check_mark: |
+| Vertical   | :heavy_check_mark: | :x:                                 | :heavy_check_mark:                | :heavy_check_mark: |
+| Horizontal | :heavy_check_mark: | :x:                                 | :heavy_check_mark:                | :heavy_check_mark: |
 
 #### Advanced Shapes
 |                | Does it exist? | Does it pass the bounding box test? | Does it pass the PostScript test? | Is it documented? |

@@ -18,14 +18,14 @@ include_directories("include")
 
 # Define main source which does not get included in the testing
 set(SOURCE_MAIN
-    source/main.cpp
-)
+    source/main.cpp)
 
 # Define all sources which may get included in the testing
 set(SOURCE_FILES
     source/Shape.cpp
     source/BasicShapes.cpp
     source/CompoundShapes.cpp
+    source/Utilities.cpp
 )
 
 # Define sources and main executable
@@ -37,20 +37,14 @@ add_executable(${EXECUTABLE_NAME} ${SOURCE_MAIN} ${SOURCE_FILES})
 # Testing executable (catch_tests.out)
 ########################################################################
 
-if(EXISTS "${CMAKE_SOURCE_DIR}/include/catch.hpp")
-    set(TEST_SOURCE_FILES
-        tests/cps_test_main.cpp
-        tests/cps_test_suites.cpp
-        ${SOURCE_FILES}
-    )
+set(TEST_SOURCE_FILES
+    tests/cps_test_main.cpp
+    tests/cps_test_suites.cpp
+    ${SOURCE_FILES})
 
-    # Define sources and executable
-    set(TEST_EXECUTABLE_NAME catch_tests.out)
-    add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCE_FILES})
+# Define sources and executable
+set(TEST_EXECUTABLE_NAME catch_tests.out)
+add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCE_FILES})
 
-    enable_testing()
-    add_test(NAME TheOneTrueTest COMMAND catch_tests.out)
-
-else()
-    message("Unable to create Testing Framework (include/catch.hpp does not exist)")
-endif()
+enable_testing()
+add_test(NAME TheOneTrueTest COMMAND catch_tests.out)

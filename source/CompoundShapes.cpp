@@ -245,3 +245,9 @@ std::string Horizontal::generate(point_t center) const
 
 	return output;
 }
+
+Ellipse::Ellipse(double xRadius, double yRadius)
+{
+	auto circle = Circle(xRadius);
+	Scaled(& circle, 1, yRadius/xRadius);
+}

@@ -119,4 +119,10 @@ protected:
 };
 
 
+class Ellipse : public Scaled{
+public:
+	Ellipse(double xRadius, double yRadius);
+	virtual ~Ellipse()=default;
+};
+
 #endif // #ifndef FILE_COMPOUNDSHAPES_HPP_INCLUDED

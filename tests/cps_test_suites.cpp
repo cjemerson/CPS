@@ -228,7 +228,14 @@ TEST_CASE( "Compound Shapes - PostScript File Generation", "[CompoundShapes][Pos
 	}
 
 	SECTION("Scaled - PostScript File Generation")
-	{}
+	{
+	    INFO("Checking Scaled Shape - Square L40 X=2 Y=3, Square L40 X=10 Y=5");
+	    auto testSquare = Square(40);
+	    auto testScale1 = Scaled(testSquare, 2, 3);
+        auto testScale2 = Scaled(testSquare, 10, 5);
+        test_shapePostScriptGeneration("ScaledSquareS40X2Y3.ps", testScale1);
+        test_shapePostScriptGeneration("ScaledSquareS40X10Y5.ps", testScale2);
+	}
 
 	SECTION("Layered - PostScript File Generation")
 	{}

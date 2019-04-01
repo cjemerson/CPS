@@ -19,7 +19,7 @@ point_t Circle::getBoundingBox() const
 	return {2 * _radius, 2 * _radius};
 }
 
-std::string Circle::generate(point_t center) const
+std::string Circle::generatePostScript(point_t center) const
 {
 	using std::to_string;
 
@@ -41,7 +41,7 @@ point_t Rectangle::getBoundingBox() const
 	return {_width, _height};
 }
 
-std::string Rectangle::generate(point_t center) const {
+std::string Rectangle::generatePostScript(point_t center) const {
 	using std::to_string;
 
 	return to_string(center.x) + " " + to_string(center.y) + " "
@@ -93,7 +93,7 @@ point_t Polygon::getBoundingBox() const
 	return {width, height};
 }
 
-std::string Polygon::generate(point_t center) const
+std::string Polygon::generatePostScript(point_t center) const
 {
 	using std::to_string;
 
@@ -116,7 +116,7 @@ point_t Spacer::getBoundingBox() const
 	return {_width, _height};
 }
 
-std::string Spacer::generate(point_t center) const
+std::string Spacer::generatePostScript(point_t center) const
 {
 	return "";
 }
@@ -128,5 +128,3 @@ Square::Square(double sideLength): Rectangle(sideLength, sideLength)
 
 Triangle::Triangle(double length): Polygon(3, length)
 {}
-
-

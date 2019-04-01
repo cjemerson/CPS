@@ -7,12 +7,25 @@
 
 
 // *********************************************************************
-// PostScript Header for Output
+// Shape Class Source
 // *********************************************************************
 
-static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
+std::string Shape::evaluatePostScript() const
+{
+    const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
+
+    return getPostScriptHeader() + generatePostScript(center) + "\nshowpage\n";
+}
+
+// *********************************************************************
+// Utility Functions
+// *********************************************************************
+
+std::string getPostScriptHeader()
+{
+    return std::string(R"(%!
 % output.ps
-% 
+%
 % Created using CPS.
 % https://www.github.com/cjemerson/CPS
 
@@ -108,15 +121,11 @@ static const std::string & POSTSCRIPT_HEADER = std::string(R"(%!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 )");
+}
 
-
-// *********************************************************************
-// Shape Class Source
-// *********************************************************************
-
-std::string Shape::evaluate() const
-{
-    const point_t center = {8.5*72.0/2.0, 11.0*72.0/2.0};
-
-    return POSTSCRIPT_HEADER + generate(center) + "\nshowpage\n";
+void makePostScriptFile(const Shape &shape, std::string filename) {
+    std::ofstream file;
+    file.open("../testfiles/" + filename + ".ps");
+    file << shape.evaluatePostScript();
+    file.close();
 }

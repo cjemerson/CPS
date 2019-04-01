@@ -18,8 +18,11 @@ int main(int argc, char const *argv[])
 	auto d = Ellipse(40.0, 80.0);
 	auto e = Horizontal({c, d, c});
 
-	std::cout << e.evaluatePostScript() << std::endl;
-    makePostScriptFile(e, "output.ps");
+	// To print to stdout
+	// std::cout << e.evaluatePostScript() << std::endl;
+
+	// To write to output.ps
+    makePostScriptFile(e, "output");
 
 	return 0;
 }

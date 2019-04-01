@@ -35,7 +35,7 @@
 // *********************************************************************
 
 // TestShape
-// Inherited to set the center of a Shape's evaluate().
+// Inherited to set the center of a Shape's evaluatePostScript().
 class TestShape
 {
 public:
@@ -56,7 +56,7 @@ protected:
 };
 
 // TestCircle
-// Overrides evaluate to only spit out generate() at a known center. 
+// Overrides evaluate to only spit out generatePostScript() at a known center. 
 class TestCircle : public Circle, public TestShape
 {
 public:
@@ -64,14 +64,14 @@ public:
 		: Circle(radius), TestShape()
 	{ }
 
-	std::string evaluate() const override
+	std::string evaluatePostScript() const override
 	{
-		return generate(_center);
+		return generatePostScript(_center);
 	}
 };
 
 // TestRectangle
-// Overrides evaluate to only spit out generate() at a known center. 
+// Overrides evaluate to only spit out generatePostScript() at a known center. 
 class TestRectangle : public Rectangle, public TestShape
 {
 public:
@@ -79,14 +79,14 @@ public:
 		: Rectangle(width, height), TestShape()
 	{ }
 
-	std::string evaluate() const override
+	std::string evaluatePostScript() const override
 	{
-		return generate(_center);
+		return generatePostScript(_center);
 	}
 };
 
 // TestPolygon
-// Overrides evaluate to only spit out generate() at a known center. 
+// Overrides evaluate to only spit out generatePostScript() at a known center. 
 class TestPolygon : public Polygon, public TestShape
 {
 public:
@@ -94,14 +94,14 @@ public:
 		: Polygon(numSides, sideLength), TestShape()
 	{ }
 
-	std::string evaluate() const override
+	std::string evaluatePostScript() const override
 	{
-		return generate(_center);
+		return generatePostScript(_center);
 	}
 };
 
 // TestSpacer
-// Overrides evaluate to only spit out generate() at a known center. 
+// Overrides evaluate to only spit out generatePostScript() at a known center. 
 class TestSpacer : public Spacer, public TestShape
 {
 public:
@@ -109,9 +109,9 @@ public:
 		: Spacer(width, height), TestShape()
 	{ }
 
-	std::string evaluate() const override
+	std::string evaluatePostScript() const override
 	{
-		return generate(_center);
+		return generatePostScript(_center);
 	}
 };
 
@@ -199,7 +199,7 @@ void test_circleGenerate(point_t center, double radius)
 	circle.setCenter(center);
 
 	INFO("Circle with radius " << radius << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
-	REQUIRE( circle.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(radius) + " circle\n" );
+	REQUIRE( circle.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(radius) + " circle\n" );
 }
 
 void test_rectangleGenerate(point_t center, double width, double height)
@@ -210,7 +210,7 @@ void test_rectangleGenerate(point_t center, double width, double height)
 	rectangle.setCenter(center);
 
 	INFO("Rectangle with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
-	REQUIRE( rectangle.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(width) + " " + to_string(height) + " rectangle\n" );
+	REQUIRE( rectangle.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(width) + " " + to_string(height) + " rectangle\n" );
 }
 
 void test_polygonGenerate(point_t center, unsigned int numSides, double sideLength)
@@ -221,7 +221,7 @@ void test_polygonGenerate(point_t center, unsigned int numSides, double sideLeng
 	polygon.setCenter(center);
 
 	INFO("Polygon with " << numSides << " sides each of length " << sideLength << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
-	REQUIRE( polygon.evaluate() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(sideLength) + " " + to_string(numSides) + " polygon\n" );
+	REQUIRE( polygon.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(sideLength) + " " + to_string(numSides) + " polygon\n" );
 }
 
 void test_spacerGenerate(point_t center, double width, double height)
@@ -230,7 +230,7 @@ void test_spacerGenerate(point_t center, double width, double height)
 	spacer.setCenter(center);
 
 	INFO("Spacer with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates no PostScript");
-	REQUIRE( spacer.evaluate() == "" );
+	REQUIRE( spacer.evaluatePostScript() == "" );
 }
 
 

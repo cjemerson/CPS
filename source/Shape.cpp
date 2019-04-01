@@ -125,7 +125,7 @@ std::string getPostScriptHeader()
 
 void makePostScriptFile(const Shape &shape, std::string filename) {
     std::ofstream file;
-    file.open("../testfiles/" + filename + ".ps");
+    file.open(filename + ".ps");
     file << shape.evaluatePostScript();
     file.close();
 }

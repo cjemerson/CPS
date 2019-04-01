@@ -188,9 +188,21 @@ TEST_CASE( "Basic Shapes - PostScript File Generation", "[BasicShapes][PostScrip
 
 	SECTION("Polygon - PostScript File Generation")
 	{
+		INFO("Checking Polygon - Pentagon L=50, Hexagon L=66.6, Heptagon L=77.7")
+		auto testPolygon1 = Polygon(5,50.0);
+		auto testPolygon2 = Polygon(6,66.6);
+		auto testPolygon3 = Polygon(7,77.7);
+		test_shapePostScriptGeneration("PolygonS5L50.ps", testPolygon1);
+		test_shapePostScriptGeneration("PolygonS6L66.6.ps", testPolygon2);
+		test_shapePostScriptGeneration("PolygonS7L77.7.ps", testPolygon3);
 	}
 
-	SECTION("Spacer - PostScript File Generation")
+	SECTION("Square - PostScript File Generation")
 	{
+		INFO("Checking Square - L=45.5, L=120");
+		auto testSquare1 = Square(45.5);
+		auto testSquare2 = Square(120);
+		test_shapePostScriptGeneration("SquareL45.5.ps", testSquare1);
+		test_shapePostScriptGeneration("SquareL120.ps", testSquare2);
 	}
 }

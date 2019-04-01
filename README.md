@@ -39,7 +39,7 @@ This is a Software Construction exercise in design patterns. The goal of this pr
 |                | Does it exist? | Does it pass the bounding box test? | Does it pass the PostScript test? | Is it documented? |
 | :---           | :---:            | :---:                               | :---:                               | :---:             |
 | Star           | :x:              | :x:                                 | :x:                                 | :x:               |
-| Ellipse        |:heavy_check_mark:| :x:                                 | :x:                                 |:heavy_check_mark: |
+| Ellipse        |:heavy_check_mark:| :x:                                 | :heavy_check_mark:                  |:heavy_check_mark: |
 | Diamond        | :x:              | :x:                                 | :x:                                 | :x:               |
 | Right-Triangle | :x:              | :x:                                 | :x:                                 | :x:               |
 

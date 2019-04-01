@@ -238,7 +238,18 @@ TEST_CASE( "Compound Shapes - PostScript File Generation", "[CompoundShapes][Pos
 	}
 
 	SECTION("Layered - PostScript File Generation")
-	{}
+	{
+	    INFO("Checking Layered Shapes - Squares L=40 L=50, L=60, Polygons 4x40, 5x50, 6x60");
+	    auto testSquare40 = Square(40);
+	    auto testSquare50 = Square(50);
+	    auto testSquare60 = Square(60);
+	    auto testPolygon5x50 = Polygon(5,50.0);
+	    auto testPolygon6x60 = Polygon(8,80.0);
+	    auto testLayeredSquares = Layered({testSquare40, testSquare50, testSquare60});
+	    auto testLayeredPolygons = Layered({testSquare40, testPolygon5x50, testPolygon6x60});
+        test_shapePostScriptGeneration("LayeredSquaresS40S50S60.ps", testLayeredSquares);
+        test_shapePostScriptGeneration("LayeredS40PolygonS5L50PolygonS8L80.ps", testLayeredPolygons);
+	}
 
 	SECTION("Vertical - PostScript File Generation")
 	{}

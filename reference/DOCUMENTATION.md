@@ -88,7 +88,7 @@ Description: A square with the given side length.
 
 Example:
 ```cpp
-auto rectangle = Square(80.0);
+auto square = Square(80.0);
 ```
 
 
@@ -100,7 +100,7 @@ Description: A triangle with the given side length.
 
 Example:
 ```cpp
-auto rectangle = Triangle(80.0);
+auto triangle = Triangle(80.0);
 ```
 
 

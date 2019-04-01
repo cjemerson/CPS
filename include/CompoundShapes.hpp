@@ -21,6 +21,8 @@
 
 #include "Shape.hpp"
 
+#include "BasicShapes.hpp"
+
 
 // *********************************************************************
 // Rotated Class
@@ -121,6 +123,7 @@ protected:
 
 class Ellipse : public Scaled{
 public:
+	const Circle _circle;
 	Ellipse(double xRadius, double yRadius);
 	virtual ~Ellipse()=default;
 };

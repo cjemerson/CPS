@@ -113,16 +113,3 @@ void makePostScriptFile(const Shape &shape, const std::string & filename)
     file << shape.evaluatePostScript();
     file.close();
 }
-
-bool fileComparePostScriptFiles(const std::string & filepath1, const std::string & filepath2)
-{
-    std::ifstream file1(filepath1);
-    std::stringstream buffer1;
-    buffer1 << file1.rdbuf();
-
-    std::ifstream file2(filepath2);
-    std::stringstream buffer2;
-    buffer2 << file1.rdbuf();
-
-    return (buffer1.str() == buffer2.str());
-}

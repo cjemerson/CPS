@@ -17,6 +17,4 @@ std::string getPostScriptHeader();
 
 void makePostScriptFile(const Shape & shape, const std::string &filename);
 
-bool fileComparePostScriptFiles(const std::string & filename1, const std::string & filename2);
-
 #endif //CPS_UTILITIES_H

@@ -19,6 +19,9 @@
 #include <cmath>
 // For sin and cos
 
+#include <algorithm>
+// For std::min
+
 #include "Shape.hpp"
 
 #include "BasicShapes.hpp"
@@ -121,11 +124,13 @@ protected:
 };
 
 
-class Ellipse : public Scaled{
+class Ellipse : public Scaled {
 public:
-	const Circle _circle;
 	Ellipse(double xRadius, double yRadius);
 	virtual ~Ellipse()=default;
+
+protected:
+	const Circle _circle;
 };
 
 #endif // #ifndef FILE_COMPOUNDSHAPES_HPP_INCLUDED

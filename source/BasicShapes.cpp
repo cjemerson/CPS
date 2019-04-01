@@ -128,3 +128,5 @@ Square::Square(double sideLength): Rectangle(sideLength, sideLength)
 
 Triangle::Triangle(double length): Polygon(3, length)
 {}
+
+

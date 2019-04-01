@@ -118,4 +118,6 @@ public:
 	virtual ~Triangle()=default;
 };
 
+
+
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

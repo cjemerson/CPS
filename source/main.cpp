@@ -16,8 +16,9 @@ int main(int argc, char const *argv[])
 
 	auto c = Layered({a, b});
 	auto d = Horizontal({c, c, c});
+	auto e = Ellipse(40.0, 80.0);
 
-	std::cout << d.evaluate() << std::endl;
+	std::cout << e.evaluate() << std::endl;
 
 	return 0;
 }

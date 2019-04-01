@@ -17,6 +17,8 @@
     * [Layered](#layered)
     * [Vertical](#vertical)
     * [Horizontal](#horizontal)
+* [Advanced Shapes](#advanced-shapes)
+    * [Ellipse](#ellipse)
 
 ## Important Notes
 
@@ -198,6 +200,8 @@ auto spacer = Spacer(40.0, 40.0);
 auto horizontal = Horizontal( { circle, spacer, circle } );
 ```
 
+## Advanced Shapes
+
 ### Ellipse
 
 Interface: `Ellipse(double xRadius, double yRadius)`
@@ -206,5 +210,5 @@ Description: An ellipse with the given x and y radii.
 
 Example:
 ```cpp
-auto ellipse = Ellipse(80, 40.0);
+auto ellipse = Ellipse(80.0, 40.0);
 ```

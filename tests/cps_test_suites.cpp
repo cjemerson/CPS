@@ -99,7 +99,15 @@ void test_spacerBoundingBox(double width, double height)
 	REQUIRE( spacer.getBoundingBox().y == height);
 }
 
-
+void test_shapePostScriptGeneration(const std::string & filename, const Shape & shape)
+{
+    std::string testFilePath = "../tests/testfiles/" + filename;
+    std::ifstream file(testFilePath);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    std::string shapePostScript = shape.evaluatePostScript();
+    REQUIRE(buffer.str() == shapePostScript);
+}
 
 // *********************************************************************
 // Test Cases for this Test Program
@@ -158,21 +166,31 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]" )
 	}
 }
 
-TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
+TEST_CASE( "Basic Shapes - PostScript File Generation", "[BasicShapes][PostScript]" )
 {
-	SECTION("Circle - PostScript Generation")
+	SECTION("Circle - PostScript File Generation")
+	{
+	    INFO("Checking Circle - Radius 80, 180");
+        auto testCircle1 = Circle(80);
+        auto testCircle2 = Circle(180);
+        test_shapePostScriptGeneration("CircleR80.ps", testCircle1);
+        test_shapePostScriptGeneration("CircleR180.ps", testCircle2);
+	}
+
+	SECTION("Rectangle - PostScript File Generation")
+	{
+	    INFO("Checking Rectangle - 80x60, 120x200");
+	    auto testRectangle1 = Rectangle(80.0, 60.0);
+	    auto testRectangle2 = Rectangle(120.0, 200.0);
+	    test_shapePostScriptGeneration("RectangleW80H60.ps", testRectangle1);
+        test_shapePostScriptGeneration("RectangleW120H200.ps", testRectangle2);
+	}
+
+	SECTION("Polygon - PostScript File Generation")
 	{
 	}
 
-	SECTION("Rectangle - PostScript Generation")
-	{
-	}
-
-	SECTION("Polygon - PostScript Generation")
-	{
-	}
-
-	SECTION("Spacer - PostScript Generation")
+	SECTION("Spacer - PostScript File Generation")
 	{
 	}
 }

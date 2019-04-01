@@ -10,13 +10,14 @@
 
 int main(int argc, char const *argv[])
 {
-	auto a = Circle(80.0);
-	auto b = Polygon(4, 160.0);
+	auto a = Square(40.0);
+    auto b = Polygon(5, 50.0);
+    auto c = Polygon(8, 80.0);
+    auto triangle = Triangle(50.0);
 
-	auto c = Layered({a, b});
-	auto d = Horizontal({c, c, c});
+    auto d = Horizontal({b,triangle});
 
-    makePostScriptFile(d, "anotherTestFile");
+    makePostScriptFile(d, "HorizontalPolygonS5L50TriangleS50");
 
 	return 0;
 }

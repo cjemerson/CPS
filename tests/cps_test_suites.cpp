@@ -267,5 +267,14 @@ TEST_CASE( "Compound Shapes - PostScript File Generation", "[CompoundShapes][Pos
 	}
 
 	SECTION("Horizontal - PostScript File Generation")
-	{}
+	{
+	    INFO("Checking Horizontal Shapes - Square L=40 Polygon 5x50, Polygon 5x50 Triangle S=50");
+	    auto testSquare40 = Square(40);
+	    auto testPolygon5x50 = Polygon(5,50.0);
+	    auto testTriangle50 = Triangle(50);
+	    auto testHorizontalSquarePolygon = Horizontal({testSquare40, testPolygon5x50});
+	    auto testHorizontalPolygonTriangle = Horizontal({testPolygon5x50, testTriangle50});
+        test_shapePostScriptGeneration("HorizontalSquareS40PolygonS5L50.ps", testHorizontalSquarePolygon);
+        test_shapePostScriptGeneration("HorizontalPolygonS5L50TriangleS50.ps", testHorizontalPolygonTriangle);
+	}
 }

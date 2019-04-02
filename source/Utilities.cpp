@@ -2,7 +2,9 @@
 //
 // Utility functions for CPS.
 
+
 #include "Utilities.h"
+
 
 std::string getPostScriptHeader()
 {
@@ -105,6 +107,7 @@ std::string getPostScriptHeader()
 
 )");
 }
+
 
 void makePostScriptFile(const Shape &shape, const std::string & filename)
 {

@@ -2,12 +2,19 @@
 //
 // Utility functions for CPS.
 
+
 #ifndef CPS_UTILITIES_H
 #define CPS_UTILITIES_H
 
-#include "Shape.hpp"
+
 #include <fstream>
-#include <sstream>
+// For std::ofstream
+
+#include <string>
+// For std::string
+
+#include "Shape.hpp"
+
 
 // *********************************************************************
 // Utility Functions

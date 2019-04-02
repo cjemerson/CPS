@@ -31,6 +31,9 @@
 #include <string>
 // For std::string, std::to_string
 
+#include <sstream>
+// For std::stringstream
+
 // *********************************************************************
 // Test Functions for this Test Program
 // *********************************************************************

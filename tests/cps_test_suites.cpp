@@ -43,16 +43,16 @@ void test_circleBoundingBox(double radius)
 	Circle circle(radius);
 
 	INFO("A Circle with radius " << radius << " has a bounding box with (" << 2 * radius << ", " << 2 * radius << ")");
-	REQUIRE( circle.getBoundingBox().x == 2 * radius );
-	REQUIRE( circle.getBoundingBox().y == 2 * radius );
+	REQUIRE( circle.getBoundingBox().x == Approx(2 * radius) );
+	REQUIRE( circle.getBoundingBox().y == Approx(2 * radius) );
 }
 
 void test_rectangleBoundingBox(double width, double height)
 {
 	Rectangle rectangle(width, height);
 	INFO("A Rectangle with width " << width << " and height " << height << " has a bounding box with width " << width << " and height " << height);
-	REQUIRE( rectangle.getBoundingBox().x == width);
-	REQUIRE( rectangle.getBoundingBox().y == height);
+	REQUIRE( rectangle.getBoundingBox().x == Approx(width) );
+	REQUIRE( rectangle.getBoundingBox().y == Approx(height) );
 }
 
 void test_polygonBoundingBox(unsigned int numSides, double sideLength)
@@ -98,8 +98,8 @@ void test_spacerBoundingBox(double width, double height)
 {
 	Spacer spacer(width, height);
 	INFO("A Spacer with width " << width << " and height " << height << " has a bounding box with width " << width << " and height " << height);
-	REQUIRE( spacer.getBoundingBox().x == width);
-	REQUIRE( spacer.getBoundingBox().y == height);
+	REQUIRE( spacer.getBoundingBox().x == Approx(width) );
+	REQUIRE( spacer.getBoundingBox().y == Approx(height) );
 }
 
 void test_shapePostScriptGeneration(const std::string & filename, const Shape & shape)

@@ -20,7 +20,22 @@
 // For Circle, Spacer
 
 #include "CompoundShapes.hpp"
-// For Layered, Vertical, Rotated
+// For Scaled, Layered, Vertical, Rotated
+
+
+// *********************************************************************
+// Ellipse Class
+// *********************************************************************
+
+class Ellipse : public Scaled {
+public:
+	Ellipse(double xRadius, double yRadius);
+
+	virtual ~Ellipse() = default;
+
+protected:
+	const Circle _circle;
+};
 
 
 // *********************************************************************

@@ -24,8 +24,6 @@
 
 #include "Shape.hpp"
 
-#include "BasicShapes.hpp"
-
 
 // *********************************************************************
 // Rotated Class
@@ -121,21 +119,6 @@ protected:
 
 protected:
 	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
-};
-
-
-// *********************************************************************
-// Ellipse Class
-// *********************************************************************
-
-class Ellipse : public Scaled {
-public:
-	Ellipse(double xRadius, double yRadius);
-
-	virtual ~Ellipse() = default;
-
-protected:
-	const Circle _circle;
 };
 
 

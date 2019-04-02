@@ -101,6 +101,7 @@ protected:
 // *******************************************************************
 // Square Class
 // *******************************************************************
+
 class Square : public Rectangle {
 public:
 	explicit Square(double length);
@@ -112,11 +113,13 @@ public:
 // *******************************************************************
 // Triangle Class
 // *******************************************************************
+
 class Triangle : public Polygon{
 public:
 	explicit Triangle(double length);
-	~Triangle() override =default;
+
 	virtual ~Triangle() = default;
 };
+
 
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

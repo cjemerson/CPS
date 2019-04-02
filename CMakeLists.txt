@@ -25,6 +25,7 @@ set(SOURCE_FILES
     source/Shape.cpp
     source/BasicShapes.cpp
     source/CompoundShapes.cpp
+    source/AdvancedShapes.cpp
     source/Utilities.cpp
 )
 

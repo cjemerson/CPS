@@ -19,6 +19,7 @@
     * [Horizontal](#horizontal)
 * [Advanced Shapes](#advanced-shapes)
     * [Ellipse](#ellipse)
+    * [Donut](#donut)
 
 ## Important Notes
 
@@ -211,4 +212,16 @@ Description: An ellipse with the given x and y radii.
 Example:
 ```cpp
 auto ellipse = Ellipse(80.0, 40.0);
+```
+
+
+#### Donut
+
+Interface: `Donut(unsigned int n, double offsetR, double subcircleR)`
+
+Description: A donut-like shape with `n` evenly-distributed subcircles of radius `subcircleR` which are each centered on the radius `offsetR`.
+
+Example:
+```cpp
+auto donut = Donut(100, 80.0, 40.0);
 ```

@@ -35,7 +35,7 @@ class Rotated : public Shape {
 public:
 	explicit Rotated(const Shape & shape, double angleInDegrees);
 
-	~Rotated() override = default;
+	virtual ~Rotated() = default;
 
 protected:
 	point_t getBoundingBox() const override;
@@ -55,7 +55,7 @@ class Scaled : public Shape {
 public:
 	explicit Scaled(const Shape & shape, double xScale, double yScale);
 
-	~Scaled() override = default;
+	virtual ~Scaled() = default;
 
 protected:
 	point_t getBoundingBox() const override;
@@ -75,7 +75,7 @@ class Layered : public Shape {
 public:
 	explicit Layered(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
-	~Layered() override = default;
+	virtual ~Layered() = default;
 
 protected:
 	point_t getBoundingBox() const override;
@@ -94,7 +94,7 @@ class Vertical : public Shape {
 public:
 	explicit Vertical(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
-	~Vertical() override = default;
+	virtual ~Vertical() = default;
 
 protected:
 	point_t getBoundingBox() const override;
@@ -113,7 +113,7 @@ class Horizontal : public Shape {
 public:
 	explicit Horizontal(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
-	~Horizontal() override = default;
+	virtual ~Horizontal() = default;
 
 protected:
 	point_t getBoundingBox() const override;
@@ -127,7 +127,8 @@ protected:
 class Ellipse : public Scaled {
 public:
 	Ellipse(double xRadius, double yRadius);
-	virtual ~Ellipse()=default;
+
+	virtual ~Ellipse() = default;
 
 protected:
 	const Circle _circle;

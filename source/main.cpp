@@ -12,12 +12,12 @@ int main(int argc, char const *argv[])
 {
 	auto a = Square(40.0);
     auto b = Polygon(5, 50.0);
-    auto c = Polygon(8, 80.0);
     auto triangle = Triangle(50.0);
 
-    auto d = Horizontal({b,triangle});
+    auto d = Layered({b,triangle});
+    auto e = Vertical({d, a});
 
-    makePostScriptFile(d, "HorizontalPolygonS5L50TriangleS50");
+    makePostScriptFile(d, "output.ps");
 
 	return 0;
 }

@@ -112,7 +112,7 @@ std::string getPostScriptHeader()
 void makePostScriptFile(const Shape &shape, const std::string & filename)
 {
     std::ofstream file;
-    file.open("../tests/testfiles/" + filename + ".ps");
+    file.open(filename);
     file << shape.evaluatePostScript();
     file.close();
 }

@@ -13,7 +13,7 @@
 
 #include "BasicShapes.hpp"
 #include "CompoundShapes.hpp"
-#include "Utilities.h"
+#include "Utilities.hpp"
 
 // *********************************************************************
 // catch.hpp

@@ -5,7 +5,7 @@
 
 #include "Shape.hpp"
 
-#include "Utilities.h"
+#include "Utilities.hpp"
 // For getPostScriptHeader()
 // Included here because of circular dependency
 

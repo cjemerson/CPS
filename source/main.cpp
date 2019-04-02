@@ -6,7 +6,7 @@
 #include <iostream>
 #include "BasicShapes.hpp"
 #include "CompoundShapes.hpp"
-#include "Utilities.h"
+#include "Utilities.hpp"
 
 int main(int argc, char const *argv[])
 {

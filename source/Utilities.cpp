@@ -3,7 +3,7 @@
 // Utility functions for CPS.
 
 
-#include "Utilities.h"
+#include "Utilities.hpp"
 
 
 std::string getPostScriptHeader()

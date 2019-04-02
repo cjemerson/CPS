@@ -34,6 +34,48 @@
 #include <sstream>
 // For std::stringstream
 
+
+// *********************************************************************
+// Helper classes for this Test Program
+// *********************************************************************
+
+class GeneratePostScriptSpy : public Shape {
+public:
+	GeneratePostScriptSpy(const Shape & shape)
+		: _shape(shape), _center({0.0, 0.0})
+	{ }
+
+	virtual ~GeneratePostScriptSpy() = default;
+
+public:
+	std::string evaluatePostScript() const override
+	{
+		return _shape.generatePostScript(_center, {});
+	}
+
+	void setCenter(point_t center)
+	{
+		_center = center;
+	}
+
+// Following protected members are NOT FOR USE, Simply to Compile
+protected:
+	point_t getBoundingBox() const override
+	{
+		return _shape.getBoundingBox({});
+	}
+
+	std::string generatePostScript(point_t center) const override
+	{
+		return _shape.generatePostScript(center, {});
+	}
+
+private:
+	const Shape & _shape;
+	point_t _center;
+};
+
+
 // *********************************************************************
 // Test Functions for this Test Program
 // *********************************************************************
@@ -102,6 +144,52 @@ void test_spacerBoundingBox(double width, double height)
 	REQUIRE( spacer.getBoundingBox().y == Approx(height) );
 }
 
+void test_circleGenerate(point_t center, double radius)
+{
+        using std::to_string;
+
+        Circle circle(radius);
+        GeneratePostScriptSpy spy(circle);
+        spy.setCenter(center);
+
+        INFO("Circle with radius " << radius << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
+        REQUIRE( spy.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(radius) + " circle\n" );
+}
+
+void test_rectangleGenerate(point_t center, double width, double height)
+{
+        using std::to_string;
+
+        Rectangle rectangle(width, height);
+        GeneratePostScriptSpy spy(rectangle);
+        spy.setCenter(center);
+
+        INFO("Rectangle with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
+        REQUIRE( spy.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(width) + " " + to_string(height) + " rectangle\n" );
+}
+
+void test_polygonGenerate(point_t center, unsigned int numSides, double sideLength)
+{
+        using std::to_string;
+
+        Polygon polygon(numSides, sideLength);
+        GeneratePostScriptSpy spy(polygon);
+        spy.setCenter(center);
+
+        INFO("Polygon with " << numSides << " sides each of length " << sideLength << " at (" << center.x << ", " << center.y << ") generates correct PostScript");
+        REQUIRE( spy.evaluatePostScript() == to_string(center.x) + " " + to_string(center.y) + " " + to_string(sideLength) + " " + to_string(numSides) + " polygon\n" );
+}
+
+void test_spacerGenerate(point_t center, double width, double height)
+{
+        Spacer spacer(width, height);
+        GeneratePostScriptSpy spy(spacer);
+        spy.setCenter(center);
+
+        INFO("Spacer with width " << width << " and height " << height << " at (" << center.x << ", " << center.y << ") generates no PostScript");
+        REQUIRE( spy.evaluatePostScript() == "" );
+}
+
 void test_shapePostScriptGeneration(const std::string & filename, const Shape & shape)
 {
     std::string testFilePath = "../tests/testfiles/" + filename;
@@ -167,6 +255,129 @@ TEST_CASE( "Basic Shapes - Bounding Box ", "[BasicShapes][BoundingBox]" )
 			}
 		}
 	}
+}
+
+TEST_CASE( "Basic Shapes - PostScript Generation", "[BasicShapes][PostScript]" )
+{
+        SECTION("Circle - PostScript Generation")
+        {
+                auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+                point_t center = {0.0, 0.0};
+                for (auto i : list)
+                {
+                        test_circleGenerate(center, i);
+                }
+
+                center = {500.0, 500.0};
+                for (auto i : list)
+                {
+                        test_circleGenerate(center, i);
+                }
+
+                center = {-73.07333, 499.02001};
+                for (auto i : list)
+                {
+                        test_circleGenerate(center, i);
+                }
+        }
+
+        SECTION("Rectangle - PostScript Generation")
+        {
+                auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+                point_t center = {0.0, 0.0};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_rectangleGenerate(center, i, j);
+                        }
+                }
+
+                center = {500.0, 500.0};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_rectangleGenerate(center, i, j);
+                        }
+                }
+
+                center = {-73.07333, 499.02001};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_rectangleGenerate(center, i, j);
+                        }
+                }
+        }
+
+        SECTION("Polygon - PostScript Generation")
+        {
+                auto sideLength_list = {0.25, 1.0, 50.0, 100.0, 500.0};
+                auto numSides_list = {2, 3, 4, 5, 6, 8, 11, 19};
+
+                point_t center = {0.0, 0.0};
+                for (auto sideLength : sideLength_list)
+                {
+                        for (auto numSides : numSides_list)
+                        {
+                                test_polygonGenerate(center, numSides, sideLength);
+                        }
+                }
+
+                center = {500.0, 500.0};
+                for (auto sideLength : sideLength_list)
+                {
+                        for (auto numSides : numSides_list)
+                        {
+                                test_polygonGenerate(center, numSides, sideLength);
+                        }
+                }
+
+                center = {-73.07333, 499.02001};
+                for (auto sideLength : sideLength_list)
+                {
+                        for (auto numSides : numSides_list)
+                        {
+                                test_polygonGenerate(center, numSides, sideLength);
+                        }
+                }
+        }
+
+        SECTION("Spacer - PostScript Generation")
+        {
+                auto list = {0.25, 1.0, 50.0, 100.0, 500.0};
+
+                point_t center = {0.0, 0.0};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_spacerGenerate(center, i, j);
+                        }
+                }
+
+                center = {500.0, 500.0};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_spacerGenerate(center, i, j);
+                        }
+                }
+
+                center = {-73.07333, 499.02001};
+                for (auto i : list)
+                {
+                        for (auto j : list)
+                        {
+                                test_spacerGenerate(center, i, j);
+                        }
+                }
+        }
 }
 
 TEST_CASE( "Basic Shapes - PostScript File Generation", "[BasicShapes][PostScript]" )

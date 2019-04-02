@@ -33,14 +33,14 @@ The line above will compile and the object `layered` will access the deallocated
 ## Shape Class
 
 A Shape has one inherited user-accessible public function:
-* `std::string evaluate() const` - Returns a string of valid PostScript to draw the Shape on the center of a page
+* `std::string evaluatePostScript() const` - Returns a string of valid PostScript to draw the Shape on the center of a page
 
 
 A derived class of Shape must define:
 * `point_t getBoundingBox() const` - Returns the bounding box to affect this and other Shapes' placement
-* `std::string generate(point_t center) const` - Returns a string of valid PostScript to draw the Shape at the given center point
+* `std::string generatePostScript(point_t center) const` - Returns a string of valid PostScript to draw the Shape at the given center point
 
-A derived class of Shape which needs to call the protected members `getBoundingBox()` and `generate(point_t)` of other Shapes can use the public wrapper functions `getBoundingBox(ShapeKey)` and `generate(point_t, ShapeKey)`.
+A derived class of Shape which needs to call the protected members `getBoundingBox()` and `generatePostScript(point_t)` of other Shapes can use the public wrapper functions `getBoundingBox(ShapeKey)` and `generatePostScript(point_t, ShapeKey)`.
 
 An Example:
 ```cpp
@@ -49,7 +49,7 @@ for (const auto & shape : shapes)
     auto boundingBox = shape.getBoundingBox({});
 
     point_t center = {0.0, 0.0}; 
-    auto postscript = shape.generate(center, {});
+    auto postscript = shape.generatePostScript(center, {});
 
     // ...
 }

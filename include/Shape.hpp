@@ -1,4 +1,3 @@
-
 // Shape.hpp
 //
 // Basic Shapes Source.
@@ -7,9 +6,9 @@
 #ifndef FILE_SHAPE_HPP_INCLUDED
 #define FILE_SHAPE_HPP_INCLUDED
 
+
 #include <string>
-#include <memory>
-#include <iostream>
+// For std::string
 
 // *********************************************************************
 // Point Type

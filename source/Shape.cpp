@@ -4,7 +4,10 @@
 
 
 #include "Shape.hpp"
+
 #include "Utilities.h"
+// For getPostScriptHeader()
+// Included here because of circular dependency
 
 // *********************************************************************
 // Shape Class Source

@@ -122,9 +122,19 @@ std::string Spacer::generatePostScript(point_t center) const
 }
 
 
+// *********************************************************************
+// Square Class
+// *********************************************************************
 
-Square::Square(double sideLength): Rectangle(sideLength, sideLength)
-{}
+Square::Square(double sideLength)
+	: Rectangle(sideLength, sideLength)
+{ }
 
-Triangle::Triangle(double length): Polygon(3, length)
-{}
+
+// *********************************************************************
+// Triangle Class
+// *********************************************************************
+
+Triangle::Triangle(double length)
+	: Polygon(3, length)
+{ }

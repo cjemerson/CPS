@@ -20,7 +20,7 @@ class Circle : public Shape {
 public:
 	explicit Circle(double radius);
 
-	~Circle() override = default;
+	virtual ~Circle() = default;
 
 public:
 	point_t getBoundingBox() const override;
@@ -41,7 +41,7 @@ class Rectangle : public Shape {
 public:
 	Rectangle(double width, double height);
 
-	~Rectangle() override = default;
+	virtual ~Rectangle() = default;
 
 public:
 	point_t getBoundingBox() const override;
@@ -62,7 +62,7 @@ class Polygon : public Shape {
 public:
 	Polygon(unsigned int numSides, double sideLength);
 
-	~Polygon() override = default;
+	virtual ~Polygon() = default;
 
 public:
 	point_t getBoundingBox() const override;
@@ -84,7 +84,7 @@ class Spacer : public Shape {
 public:
 	Spacer(double width, double height);
 
-	~Spacer() override = default;
+	virtual ~Spacer() = default;
 
 public:
 	point_t getBoundingBox() const override;
@@ -104,8 +104,8 @@ protected:
 class Square : public Rectangle {
 public:
 	explicit Square(double length);
-	~Square() override = default;
 
+	virtual ~Square() = default;
 };
 
 
@@ -116,6 +116,7 @@ class Triangle : public Polygon{
 public:
 	explicit Triangle(double length);
 	~Triangle() override =default;
+	virtual ~Triangle() = default;
 };
 
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

@@ -246,7 +246,14 @@ std::string Horizontal::generatePostScript(point_t center) const
 	return output;
 }
 
+
+// *********************************************************************
+// Ellipse Class
+// *********************************************************************
+
 Ellipse::Ellipse(double xRadius, double yRadius)
-: Scaled(_circle, std::min(xRadius/yRadius, 1.0), std::min(yRadius/xRadius, 1.0)),
-  _circle(std::min(xRadius, yRadius))
+    : Scaled(_circle,
+             std::min(xRadius/yRadius, 1.0),
+             std::min(yRadius/xRadius, 1.0)),
+      _circle(std::min(xRadius, yRadius))
 { }

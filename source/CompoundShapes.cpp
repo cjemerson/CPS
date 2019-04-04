@@ -30,13 +30,13 @@ point_t Rotated::getBoundingBox() const
 	return {width, height};
 }
 
-std::string Rotated::generate(point_t center) const
+std::string Rotated::generatePostScript(point_t center) const
 {
 	using std::to_string;
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
 			+ " " + to_string(_angleInDegrees) + " rotateAbout\n"
-			+ _shape.generate(center, {}) + "grestore\n";
+			+ _shape.generatePostScript(center, {}) + "grestore\n";
 }
 
 
@@ -61,13 +61,13 @@ point_t Scaled::getBoundingBox() const
 	return result;
 }
 
-std::string Scaled::generate(point_t center) const
+std::string Scaled::generatePostScript(point_t center) const
 {
 	using std::to_string;
 
 	return "gsave\n" + to_string(center.x) + " " + to_string(center.y)
 			+ " " + to_string(_xScale) + " " + to_string(_yScale)
-			+ " scaleAbout\n" + _shape.generate(center, {})
+			+ " scaleAbout\n" + _shape.generatePostScript(center, {})
 			+ "grestore\n";
 }
 
@@ -105,9 +105,9 @@ point_t Layered::getBoundingBox() const
 	return result;
 }
 
-std::string Layered::generate(point_t center) const
+std::string Layered::generatePostScript(point_t center) const
 {
-	std::string output = "";
+	std::string output;
 
 	for (auto shapeReference : _shapeReferences)
 	{
@@ -117,7 +117,7 @@ std::string Layered::generate(point_t center) const
 
 		// To access other Shapes' protected getBoundingBox need
 		// to pass a ShapeKey to the public getBoundingBox
-		output += shape.generate(center, {});
+		output += shape.generatePostScript(center, {});
 	}
 
 	return output;
@@ -158,11 +158,11 @@ point_t Vertical::getBoundingBox() const
 	return result;
 }
 
-std::string Vertical::generate(point_t center) const
+std::string Vertical::generatePostScript(point_t center) const
 {
 	auto height = getBoundingBox().y;
 
-	std::string output = "";
+	std::string output;
 
 	auto x = center.x;
 	auto y = center.y - (height / 2.0);
@@ -178,7 +178,7 @@ std::string Vertical::generate(point_t center) const
 		auto shapeHeight = shape.getBoundingBox({}).y;
 
 		y += shapeHeight / 2.0;
-		output += shape.generate({x, y}, {});
+		output += shape.generatePostScript({x, y}, {});
 		y += shapeHeight / 2.0;
 	}
 
@@ -219,11 +219,11 @@ point_t Horizontal::getBoundingBox() const
 	return result;
 }
 
-std::string Horizontal::generate(point_t center) const
+std::string Horizontal::generatePostScript(point_t center) const
 {
 	auto width = getBoundingBox().x;
 
-	std::string output = "";
+	std::string output;
 
 	auto x = center.x - (width / 2.0);
 	auto y = center.y;
@@ -239,7 +239,7 @@ std::string Horizontal::generate(point_t center) const
 		auto shapeWidth = shape.getBoundingBox({}).x;
 
 		x += shapeWidth / 2.0;
-		output += shape.generate({x, y}, {});
+		output += shape.generatePostScript({x, y}, {});
 		x += shapeWidth / 2.0;
 	}
 

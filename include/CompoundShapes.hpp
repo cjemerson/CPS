@@ -19,6 +19,9 @@
 #include <cmath>
 // For sin and cos
 
+#include <algorithm>
+// For std::min
+
 #include "Shape.hpp"
 
 
@@ -28,13 +31,13 @@
 
 class Rotated : public Shape {
 public:
-	Rotated(const Shape & shape, double angleInDegrees);
+	explicit Rotated(const Shape & shape, double angleInDegrees);
 
 	virtual ~Rotated() = default;
 
 protected:
-	virtual point_t getBoundingBox() const override;
-	virtual std::string generate(point_t center) const override;
+	point_t getBoundingBox() const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	const Shape & _shape;
@@ -48,13 +51,13 @@ protected:
 
 class Scaled : public Shape {
 public:
-	Scaled(const Shape & shape, double xScale, double yScale);
+	explicit Scaled(const Shape & shape, double xScale, double yScale);
 
 	virtual ~Scaled() = default;
 
 protected:
-	virtual point_t getBoundingBox() const override;
-	virtual std::string generate(point_t center) const override;
+	point_t getBoundingBox() const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	const Shape & _shape;
@@ -68,51 +71,51 @@ protected:
 
 class Layered : public Shape {
 public:
-	Layered(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
+	explicit Layered(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Layered() = default;
 
 protected:
-	virtual point_t getBoundingBox() const override;
-	virtual std::string generate(point_t center) const override;
+	point_t getBoundingBox() const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
 };
 
 
-// // *********************************************************************
-// // Vertical Class
-// // *********************************************************************
+// *********************************************************************
+// Vertical Class
+// *********************************************************************
 
 class Vertical : public Shape {
 public:
-	Vertical(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
+	explicit Vertical(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Vertical() = default;
 
 protected:
-	virtual point_t getBoundingBox() const override;
-	virtual std::string generate(point_t center) const override;
+	point_t getBoundingBox() const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;
 };
 
 
-// // *********************************************************************
-// // Horizontal Class
-// // *********************************************************************
+// *********************************************************************
+// Horizontal Class
+// *********************************************************************
 
 class Horizontal : public Shape {
 public:
-	Horizontal(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
+	explicit Horizontal(std::vector<std::reference_wrapper<const Shape>> shapeReferences);
 
 	virtual ~Horizontal() = default;
 
 protected:
-	virtual point_t getBoundingBox() const override;
-	virtual std::string generate(point_t center) const override;
+	point_t getBoundingBox() const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	std::vector<std::reference_wrapper<const Shape>> _shapeReferences;

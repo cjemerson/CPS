@@ -5,7 +5,7 @@ This directory contains each source file.
 - main.cpp
     * Main program.
 - Shape.cpp
-    * Defines `evaluate()` for the abstract `Shape` class.
+    * Defines `evaluatePostScript()` for the abstract `Shape` class.
 - BasicShapes.cpp
     * Defines the `Circle` class.
     * Defines the `Rectangle` class.

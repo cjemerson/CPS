@@ -6,9 +6,9 @@
 #ifndef FILE_SHAPE_HPP_INCLUDED
 #define FILE_SHAPE_HPP_INCLUDED
 
-#include <string>
-#include <memory>
 
+#include <string>
+// For std::string
 
 // *********************************************************************
 // Point Type
@@ -33,7 +33,7 @@ public:
 
 public:
 	// To generate the PostScript to draw a Shape:
-	virtual std::string evaluate() const;
+	virtual std::string evaluatePostScript() const;
 
 public:
 	virtual point_t getBoundingBox(ShapeKey key) const
@@ -43,19 +43,18 @@ public:
 		return getBoundingBox();
 	}
 
-	virtual std::string generate(point_t center, ShapeKey key) const
+	virtual std::string generatePostScript(point_t center, ShapeKey key) const
 	{
 		(void) key;
 
-		return generate(center);
+		return generatePostScript(center);
 	}
 
 protected:
 	// A new type of shape needs to have these defined
 	virtual point_t getBoundingBox() const = 0;
-	virtual std::string generate(point_t center) const = 0;
+	virtual std::string generatePostScript(point_t center) const = 0;
 
 };
-
 
 #endif // #ifndef FILE_SHAPE_HPP_INCLUDED

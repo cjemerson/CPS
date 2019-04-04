@@ -1,23 +1,26 @@
 // main.cpp
 //
-// Simple main to test compilation.
+// Simple main to generate shapes.
 
 
 #include <iostream>
-
 #include "BasicShapes.hpp"
 #include "CompoundShapes.hpp"
-
+#include "AdvancedShapes.hpp"
+#include "Utilities.hpp"
 
 int main(int argc, char const *argv[])
 {
-	auto a = Circle(80.0);
-	auto b = Polygon(4, 160.0);
+    auto topLBotR = Donut(12, 20.0, 40.0);
+    auto mid = Donut(42, 60.0, 40.0);
 
-	auto c = Layered({a, b});
-	auto d = Horizontal({c, c, c});
+    auto vertical1 = Vertical({topLBotR, mid, topLBotR});
 
-	std::cout << d.evaluate() << std::endl;
+    auto topRBotL = Donut(42, 40.0, 40.0);
+    auto horizontal = Horizontal({topRBotL, vertical1, topRBotL});
+    auto rotated = Rotated(horizontal, 45.0);
+
+    makePostScriptFile(rotated, "output.ps");
 
 	return 0;
 }

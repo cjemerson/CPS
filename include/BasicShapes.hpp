@@ -6,7 +6,7 @@
 #ifndef FILE_BASICSHAPES_HPP_INCLUDED
 #define FILE_BASICSHAPES_HPP_INCLUDED
 
-#include <math.h>
+#include <cmath>
 // For sin, cos in Polygon getBoundingBox()
 
 #include "Shape.hpp"
@@ -18,15 +18,15 @@
 
 class Circle : public Shape {
 public:
-	Circle(double radius);
+	explicit Circle(double radius);
 
 	virtual ~Circle() = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _radius;
@@ -44,10 +44,10 @@ public:
 	virtual ~Rectangle() = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _width, _height;
@@ -65,10 +65,10 @@ public:
 	virtual ~Polygon() = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _sideLength;
@@ -87,10 +87,10 @@ public:
 	virtual ~Spacer() = default;
 
 public:
-	virtual point_t getBoundingBox() const override;
+	point_t getBoundingBox() const override;
 
 protected:
-	virtual std::string generate(point_t center) const override;
+	std::string generatePostScript(point_t center) const override;
 
 protected:
 	double _width, _height;
@@ -99,23 +99,27 @@ protected:
 
 
 // *******************************************************************
-// Rectangle Class
+// Square Class
 // *******************************************************************
+
 class Square : public Rectangle {
 public:
-	Square(double length);
-	virtual ~Square() = default;
+	explicit Square(double length);
 
+	virtual ~Square() = default;
 };
 
 
 // *******************************************************************
 // Triangle Class
 // *******************************************************************
+
 class Triangle : public Polygon{
 public:
-	Triangle(double length);
-	virtual ~Triangle()=default;
+	explicit Triangle(double length);
+
+	virtual ~Triangle() = default;
 };
+
 
 #endif // #ifndef FILE_BASICSHAPES_HPP_INCLUDED

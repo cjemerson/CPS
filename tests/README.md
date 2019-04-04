@@ -1,5 +1,7 @@
 <!-- tests/README.md -->
 
+This will annoy CJ.
+
 This directory contains the source files for the testing framework.
 
 - cps_test_main.cpp
